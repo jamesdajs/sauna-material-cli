@@ -1,0 +1,55 @@
+
+<form [formGroup]="loginForm">
+  
+  <mat-grid-list cols="1" rowHeight="400px">
+    <mat-grid-tile>
+        <table>
+          <tr><th colspan="3"><h4 align="left">Crear Usuario</h4></th></tr>
+            <tr><td colspan="3">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="name" matInput placeholder="Nombre" >
+                    <mat-error >
+                      {{validar('El nombre ','name')}}
+                  </mat-error>
+                </mat-form-field>
+            </td></tr>
+            <tr><td>
+                <mat-form-field class="example-full-width">
+                <mat-label>CI</mat-label>
+                <input formControlName="ci" matInput placeholder="Cedula de identidad">
+             </mat-form-field></td>
+             <td>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Celular</mat-label>
+                    <input formControlName="phone" matInput placeholder="60480000" value="">
+                  </mat-form-field>
+             </td>
+             <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>Genero</mat-label>
+                    <mat-select formControlName="gender">
+                      <mat-option value="0">Masculino</mat-option>
+                      <mat-option value="1">Femenino</mat-option>
+                    </mat-select>
+                    <mat-error >
+                      {{validar('El genero ','gender')}}
+                  </mat-error>
+                  </mat-form-field>
+             </td>
+            </tr>
+            <tr><td colspan="3">
+              <mat-form-field class="example-full-width">
+                <mat-label  >Observaciones</mat-label>
+                <textarea formControlName="observation" matInput placeholder="Describe alguna observación obtenida"></textarea>
+              </mat-form-field>
+            </td></tr>
+            <tr><td colspan="3">
+              <button  mat-raised-button  (click)="back()"  >Atras</button>
+              <button  mat-raised-button color="primary" (click)="create()" [disabled]="!loginForm.valid" >Crear Usuario</button>
+           </td></tr>
+        </table>
+        </mat-grid-tile>
+      </mat-grid-list>
+      
+</form>

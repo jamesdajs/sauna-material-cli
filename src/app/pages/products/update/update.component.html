@@ -1,0 +1,83 @@
+
+<form [formGroup]="loginForm">
+  
+    <mat-grid-list cols="1" rowHeight="650px">
+      <mat-grid-tile aling="top">
+          <table>
+            <tr><th colspan="3"><h4 align="left">Modificar Producto</h4></th></tr>
+              <tr><td colspan="3">
+                  <mat-form-field class="example-full-width">
+                      <mat-label>Nombre</mat-label>
+                      <input formControlName="name" matInput placeholder="Nombre" >
+                      <mat-error >
+                        {{validar('El nombre ','name')}}
+                    </mat-error>
+                  </mat-form-field>
+              </td></tr>
+              <tr><td>
+                  <mat-form-field class="example-full-width">
+                  <mat-label>Precio</mat-label>
+                  <input formControlName="price" type="number" matInput placeholder="Precio del producto">
+                  <mat-error >
+                    {{validar('El precio ','price')}}
+                </mat-error>
+                </mat-form-field></td>
+               <td colspan="2" rowspan="3">
+                <mat-card class="example-card">
+                  <img mat-card-image [src]="preview?preview:'https://apandharampur.websites.co.in/dummytemplate/img/product-placeholder.png'" alt="Photo of a Shiba Inu">
+                </mat-card>
+               </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Categoria</mat-label>
+                      <mat-select formControlName="categoryId" >
+                        <ng-container *ngFor="let item of categoryData; let i = index">
+  
+                          <mat-option [value]="item.id">{{item.name}}</mat-option>
+                        </ng-container>
+                        
+                      </mat-select>
+                      <mat-error >
+                        {{validar('La categoria ','categoryId')}}
+                      </mat-error>
+                      <!-- 
+  
+                      -->
+                    </mat-form-field>
+               </td>
+               
+              </tr>
+              <tr><td>
+                <mat-form-field appearance="outline">
+                  <mat-label>Seleccionar imagen -></mat-label>
+                  <input placeholder="s"
+                    matInput
+                    type="text" disabled 
+                  />
+                  <button (click)="selectImage()" mat-icon-button matSuffix >
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                </mat-form-field>
+              </td></tr>
+              <tr><td colspan="3"><mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar></td></tr>
+              <tr><td colspan="3">
+                <mat-form-field class="example-full-width">
+                  <mat-label  >Descripcion</mat-label>
+                  <textarea formControlName="description" matInput placeholder="Describe el producto"></textarea>
+                </mat-form-field>
+              </td></tr>
+              <tr><td colspan="3">
+                <button  mat-raised-button  (click)="back()"  >Atras</button>
+                <button  mat-raised-button color="primary" (click)="upload()" [disabled]="!loginForm.valid" >Modificar</button>
+             </td></tr>
+          </table>
+          </mat-grid-tile>
+        </mat-grid-list>
+        
+  </form>
+  
+   <input placeholder="fileUpload" id="fileUpload" name="fileUpload" type="file" accept="image/*" (change)="selectFile($event)" hidden />
+      <!--<img [src]="preview" class="preview"> -->
+      

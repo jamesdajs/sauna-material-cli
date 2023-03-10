@@ -1,0 +1,13 @@
+<mat-toolbar>
+ <span>Sauna Florida</span>
+ <span class="example-spacer"></span>
+ <button mat-button (click)="redirec('customers')">Clientes</button>
+ <button mat-button (click)="redirec('categories')">Categorias de productos </button>
+ <button mat-button (click)="redirec('products')">Productos </button>
+ <button mat-button (click)="redirec('lockers')">Casilleros </button>
+ <button mat-button (click)="redirec('services')">Servicios </button>
+ <button mat-button (click)="redirec('entries')">Entradas </button>
+ <button mat-icon-button (click)="logout()" class="example-icon" aria-label="Example icon-button with logout icon">
+  <mat-icon>logout</mat-icon>
+</button>
+</mat-toolbar>

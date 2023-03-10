@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Datos del Producto</h2>
+<mat-dialog-content >
+    <table>
+        <tr><td><strong>Id:</strong> </td><td>{{data.id}}</td>
+            <td  rowspan="4">
+                <mat-card class="example-card">
+                  <img height="250px" mat-card-image [src]="data.urlImage?data.urlImage:'https://apandharampur.websites.co.in/dummytemplate/img/product-placeholder.png'" alt="Photo of a Shiba Inu">
+                </mat-card>
+               </td>
+        </tr>
+        <tr><td><strong>Nombre:</strong></td><td>{{data.name}}</td></tr>
+        <tr><td><strong>Precio:</strong></td><td>{{data.price}}</td></tr>
+        <tr><td><strong>Categoria:</strong> </td><td>{{data.category?.name}}</td></tr>
+        <tr><td><strong>Fecha de registro:</strong> </td><td>{{formatDate(data.createAt)}}</td></tr>
+        <tr><td><strong>Descripcion:</strong> </td><td colspan="2">{{data.description}}</td></tr>
+
+    </table>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+  </mat-dialog-actions>

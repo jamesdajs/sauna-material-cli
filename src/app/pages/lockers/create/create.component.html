@@ -1,0 +1,42 @@
+
+<form [formGroup]="loginForm">
+  
+    <mat-grid-list cols="1" rowHeight="400px">
+      <mat-grid-tile>
+          <table>
+            <tr><th colspan="3"><h4 align="left">Crear Casillero</h4></th></tr>
+              <tr>
+               <td>
+                  <mat-form-field class="example-full-width">
+                      <mat-label>Codigo</mat-label>
+                      <input formControlName="code" matInput placeholder="01" value="">
+                    </mat-form-field>
+               </td>
+               <td>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Tipo</mat-label>
+                      <mat-select formControlName="type">
+                        <mat-option value="0">Masculino</mat-option>
+                        <mat-option value="1">Femenino</mat-option>
+                      </mat-select>
+                      <mat-error >
+                        {{validar('El genero ','type')}}
+                    </mat-error>
+                    </mat-form-field>
+               </td>
+              </tr>
+              <tr><td colspan="2">
+                <mat-form-field class="example-full-width">
+                  <mat-label  >Observaciones</mat-label>
+                  <textarea formControlName="observation" matInput placeholder="Describe alguna observación obtenida"></textarea>
+                </mat-form-field>
+              </td></tr>
+              <tr><td colspan="2">
+                <button  mat-raised-button  (click)="back()"  >Atras</button>
+                <button  mat-raised-button color="primary" (click)="create()" [disabled]="!loginForm.valid" >Crear</button>
+             </td></tr>
+          </table>
+          </mat-grid-tile>
+        </mat-grid-list>
+        
+  </form>

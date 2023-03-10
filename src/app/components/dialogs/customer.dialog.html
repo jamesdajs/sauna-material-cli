@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Datos del Cliente</h2>
+<mat-dialog-content class="mat-typography">
+    <table>
+        <tr><td><strong>Ci:</strong> </td><td>{{data.ci}}</td></tr>
+        <tr><td><strong>Nombre:</strong></td><td>{{data.name}}</td></tr>
+        <tr><td><strong>Celular:</strong></td><td>{{data.phone}}</td></tr>
+        <tr><td><strong>Genero:</strong> </td><td>{{data.gender==1?'Femenino':'Masculino'}}</td></tr>
+        <tr><td><strong>Fecha de registro:</strong> </td><td>{{formatDate(data.createAt)}}</td></tr>
+        <tr><td><strong>Obserbaciones:</strong> </td><td>{{data.observation}}</td></tr>
+
+    </table>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+</mat-dialog-actions>
