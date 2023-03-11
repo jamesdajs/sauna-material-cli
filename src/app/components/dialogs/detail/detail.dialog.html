@@ -1,0 +1,64 @@
+<h1 mat-dialog-title> Agregar un Servicio</h1>
+<mat-dialog-content >
+    
+<form [formGroup]="loginForm">
+          <table>
+              <tr>
+                <td>
+                  <mat-form-field appearance="fill">
+                      <mat-label>Servicio</mat-label>
+                      <mat-select formControlName="serviceId" (selectionChange)="onChange($event)">
+                        <ng-container *ngFor="let item of serviceData; let i = index">
+
+                          <mat-option [value]="item.id">{{item.name+' '+ item.price+' Bs.'}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error >
+                        {{validar('El servicio ','serviceId')}}
+                    </mat-error>
+                    </mat-form-field>
+               </td>
+               <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>Casillero</mat-label>
+                    <mat-select formControlName="lockerId">
+                      <mat-option value="">Sin Casillero</mat-option>
+                      <ng-container *ngFor="let item of lockerData; let i = index">
+              
+                          <mat-option [value]="item.id">{{'Nº '+item.code+' '+(item.type=="0"?'Mascilino':(item.type=="1"?'Femenino':'Privado')) }}</mat-option>
+                          
+                        
+                      </ng-container>
+                    </mat-select>
+                    <mat-error >
+                      {{validar('El casillero ','lockerId')}}
+                  </mat-error>
+                  </mat-form-field>
+             </td>
+                <td >
+                  <mat-form-field class="example-full-width">
+                      <mat-label>Cantidad</mat-label>
+                      <input formControlName="cant" matInput placeholder="Cantidad" >
+                      <mat-error >
+                        {{validar('La cantidad ','cant')}}
+                    </mat-error>
+                  </mat-form-field>
+              </td></tr>
+              <tr *ngIf="!!serviceSelect" ><td>{{serviceSelect.type==0?'Publico':'Privado'}} {{serviceSelect.name}}</td> <td colspan="2">{{serviceSelect.description}} </td></tr>
+              <tr><td *ngIf="!!serviceSelect">
+                  <mat-form-field class="example-full-width" >
+                  <mat-label>Precio</mat-label>
+                  <input [value]="serviceSelect.price?serviceSelect.price:0" placeholder="Precio" type="number" matInput  disabled>
+                  
+               </mat-form-field></td>
+              </tr>
+              <tr><td colspan="3">
+              </td></tr>
+          </table>
+        
+  </form>
+</mat-dialog-content >
+<div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">No </button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Si</button>
+</div>

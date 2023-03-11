@@ -10,8 +10,8 @@ import { AuthService } from './auth.service';
 })
 export class ServiceService {
   constructor(private http :HttpClient,private authService:AuthService) { }
-  list(){
-    return this.http.get<[Service]>(environment.url+"/services")
+  list(state=''){
+    return this.http.get<[Service]>(environment.url+"/services"+state)
     .pipe(catchError(this.authService.httpError))
   }
   create(body:ServiceCreateRequest){

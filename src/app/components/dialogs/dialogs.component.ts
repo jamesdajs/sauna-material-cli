@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Customer } from 'src/app/interfaces/customer';
 import * as moment from 'moment';
 import { Product } from 'src/app/interfaces/product';
+import { Entry } from 'src/app/interfaces/entry';
 moment.locale('es');
 export interface DialogData {
     title: string;
@@ -79,3 +80,4 @@ export interface DialogData {
       return m.format('LLL');
     }
   }
+

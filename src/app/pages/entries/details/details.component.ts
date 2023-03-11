@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DetailDialog } from 'src/app/components/dialogs/detail/detail.dialog';
 import { Detail } from 'src/app/interfaces/detail';
 import { DetailProduct } from 'src/app/interfaces/detailProduct';
 import { Entry } from 'src/app/interfaces/entry';
@@ -52,5 +53,14 @@ export class DetailsComponent {
         this.loading = false
       },
     })
+  }
+  openCreateDetailDialog():void {
+    const dialogRef = this.dialog.open(DetailDialog, {
+      data:this.entry,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

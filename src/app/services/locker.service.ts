@@ -10,8 +10,8 @@ import { AuthService } from './auth.service';
 })
 export class LockerService {
   constructor(private http :HttpClient,private authService:AuthService) { }
-  list(){
-    return this.http.get<[Locker]>(environment.url+"/lockers")
+  list(state:string=''){
+    return this.http.get<[Locker]>(environment.url+"/lockers"+state)
     .pipe(catchError(this.authService.httpError))
   }
   create(body:LockerCreateRequest){

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
@@ -19,9 +19,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ValidationComponent } from '../components/validation/validation.component';
 import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog } from '../components/dialogs/dialogs.component';
+import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
 @NgModule({
  imports:      [ 
     CommonModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatInputModule,
     MatFormFieldModule,
@@ -43,6 +45,7 @@ import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog } from '../co
     ConfirmDialog,
     CustomerDialog,
     ProductDialog,
+    DetailDialog,
 ],
  exports:      [
      MatToolbarModule,
@@ -66,6 +69,8 @@ import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog } from '../co
      MatMenuModule,
      MatProgressBarModule,
      ProductDialog,
+     DetailDialog,
+     ReactiveFormsModule,
     ]
 })
 export class SharedModule { }
