@@ -9,7 +9,7 @@ export interface Entry {
     createAt:string
     customer:Customer
     user:User
-    detail:[Detail]
+    details:[Detail]
   }
 
 export interface EntryCreateRequest {

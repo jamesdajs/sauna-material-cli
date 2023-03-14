@@ -21,8 +21,7 @@
                <td>
                 <mat-form-field appearance="fill">
                     <mat-label>Casillero</mat-label>
-                    <mat-select formControlName="lockerId">
-                      <mat-option value="">Sin Casillero</mat-option>
+                    <mat-select formControlName="lockerId" multiple>
                       <ng-container *ngFor="let item of lockerData; let i = index">
               
                           <mat-option [value]="item.id">{{'Nº '+item.code+' '+(item.type=="0"?'Mascilino':(item.type=="1"?'Femenino':'Privado')) }}</mat-option>
@@ -38,7 +37,7 @@
                 <td >
                   <mat-form-field class="example-full-width">
                       <mat-label>Cantidad</mat-label>
-                      <input formControlName="cant" matInput placeholder="Cantidad" >
+                      <input formControlName="cant" type="number" matInput placeholder="Cantidad" >
                       <mat-error >
                         {{validar('La cantidad ','cant')}}
                     </mat-error>
@@ -60,5 +59,5 @@
 </mat-dialog-content >
 <div mat-dialog-actions align="end">
     <button mat-button (click)="onNoClick()">No </button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Si</button>
+    <button mat-button (click)="create()" [disabled]="!loginForm.valid" cdkFocusInitial>Si</button>
 </div>

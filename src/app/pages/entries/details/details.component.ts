@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailDialog } from 'src/app/components/dialogs/detail/detail.dialog';
+import { AlertDialog } from 'src/app/components/dialogs/dialogs.component';
 import { Detail } from 'src/app/interfaces/detail';
 import { DetailProduct } from 'src/app/interfaces/detailProduct';
 import { Entry } from 'src/app/interfaces/entry';
@@ -42,7 +43,7 @@ export class DetailsComponent {
       next: (res) => {
         console.log(res);
         this.entry = res
-        this.dataSource= new MatTableDataSource(res.detail)
+        this.dataSource= new MatTableDataSource(res.details)
       },
       error: (e) => {
         console.log(e);
@@ -57,6 +58,19 @@ export class DetailsComponent {
   openCreateDetailDialog():void {
     const dialogRef = this.dialog.open(DetailDialog, {
       data:this.entry,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.loadData()
+        this.openAlertDialog('Se adiciono el servicio correctamente')
+      }
+    });
+  }
+  openAlertDialog(message:string) : void {
+    const dialogRef = this.dialog.open(AlertDialog, {
+      data: {title: "Sauna Florida", message},
     });
 
     dialogRef.afterClosed().subscribe(result => {

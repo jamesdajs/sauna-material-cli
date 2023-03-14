@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { Entry } from "src/app/interfaces/entry";
 import { Locker } from "src/app/interfaces/locker";
 import { Service } from "src/app/interfaces/service";
+import { DetailService } from "src/app/services/detail.service";
 import { ErrorFormService } from "src/app/services/errorForm.service";
 import { LockerService } from "src/app/services/locker.service";
 import { ServiceService } from "src/app/services/service.service";
@@ -25,6 +26,7 @@ import { ServiceService } from "src/app/services/service.service";
       @Inject(MAT_DIALOG_DATA) public data: Entry,
       private lockerService:LockerService,
       private serviceService:ServiceService,
+      private detailService:DetailService,
       private formBuilder:FormBuilder,
       private errorform:ErrorFormService
     ) {
@@ -50,10 +52,22 @@ import { ServiceService } from "src/app/services/service.service";
     onNoClick(): void {
       this.dialogRef.close();
     }
+    create(): void {
+      let data = this.loginForm.value
+      data.price = this.serviceSelect.price
+      data.entryId = this.data.id
+      this.detailService.create(this.loginForm.value)
+      .subscribe(res=>{
+        console.log(res);
+        
+        this.dialogRef.close(true);
+      })
+    }
     validar(text:string,name:string){
         return this.errorform.validar(text,name,this.loginForm)
       }
       onChange(e:any){
+
         let service =this.serviceData.find(data => data.id==e.value)
         console.log(e,service);
         this.serviceSelect = service!
