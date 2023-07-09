@@ -1,0 +1,15 @@
+
+// styles.scss
+
+@use "@angular/material" as mat;
+
+@use "./assets/styles/_light.scss";
+
+@include mat.core();
+
+@include mat.core-theme(light.$my-app-light-theme);
+@include mat.button-theme(light.$my-app-light-theme);
+
+body {
+    margin: 0
+}

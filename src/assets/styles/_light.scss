@@ -1,0 +1,22 @@
+
+// src/styles/themes/_light.scss
+
+@use "sass:map";
+@use "@angular/material" as mat;
+
+$my-app-light-primary: mat.define-palette(mat.$teal-palette);
+$my-app-light-accent: mat.define-palette(mat.$cyan-palette);
+
+$my-app-light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-app-light-primary,
+      accent: $my-app-light-accent,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+
+@include mat.all-component-themes($my-app-light-theme);

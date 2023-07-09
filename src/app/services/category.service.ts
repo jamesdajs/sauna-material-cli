@@ -10,8 +10,8 @@ import { AuthService } from './auth.service';
 })
 export class CategoryService {
   constructor(private http :HttpClient,private authService:AuthService) { }
-  list(){
-    return this.http.get<[Category]>(environment.url+"/categories")
+  list(url=""){
+    return this.http.get<[Category]>(environment.url+"/categories"+url)
     .pipe(catchError(this.authService.httpError))
   }
   create(body:CategoryCreateRequest){

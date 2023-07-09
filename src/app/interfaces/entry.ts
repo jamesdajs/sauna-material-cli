@@ -1,5 +1,6 @@
 import { Customer } from "./customer"
 import { Detail } from "./detail"
+import { DetailProduct } from "./detailProduct"
 import { User } from "./user"
 
 export interface Entry {
@@ -10,6 +11,7 @@ export interface Entry {
     customer:Customer
     user:User
     details:[Detail]
+    detailsProduct:[DetailProduct]
   }
 
 export interface EntryCreateRequest {

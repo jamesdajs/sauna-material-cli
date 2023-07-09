@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailDialog } from 'src/app/components/dialogs/detail/detail.dialog';
+import { DetailProductDialog } from 'src/app/components/dialogs/detailProduct/detailProduct.dialog';
 import { AlertDialog } from 'src/app/components/dialogs/dialogs.component';
 import { Detail } from 'src/app/interfaces/detail';
 import { DetailProduct } from 'src/app/interfaces/detailProduct';
@@ -18,7 +19,7 @@ export class DetailsComponent {
   id:string
   entry:Entry
   loading:boolean = true
-  displayedColumns: string[] = [ 'name', 'price','cant','total', 'options'];
+  displayedColumns: string[] = [ 'name', 'lockers','price','cant','total', 'options'];
   displayedProductColumns: string[] = [ 'name', 'price','cant','total', 'options'];
   dataSource: MatTableDataSource<Detail>;
   dataProductSource: MatTableDataSource<DetailProduct>;
@@ -44,6 +45,7 @@ export class DetailsComponent {
         console.log(res);
         this.entry = res
         this.dataSource= new MatTableDataSource(res.details)
+        this.dataProductSource = new MatTableDataSource(res.detailsProduct)
       },
       error: (e) => {
         console.log(e);
@@ -76,5 +78,24 @@ export class DetailsComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+  openCreateDetailProductDialog():void {
+    const dialogRef = this.dialog.open(DetailProductDialog, {
+      data:this.entry,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.loadData()
+        this.openAlertDialog('Se adiciono el producto correctamente')
+      }
+    });
+  }
+  getTotalCost() {
+    return this.dataSource.data.map(t => t.price*t.cant).reduce((acc, value) => acc + value, 0);
+  }
+  getTotalCostProducts(){
+    return this.dataProductSource.data.map(t => t.price*t.cant).reduce((acc, value) => acc + value, 0);
   }
 }

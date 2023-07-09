@@ -2,33 +2,33 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, finalize, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Product, ProductCreateRequest } from '../interfaces/product';
+import { DetailProduct, DetailProductCreateRequest } from '../interfaces/detailProduct';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class DetailProductService {
   constructor(private http :HttpClient,private authService:AuthService) { }
-  list(state:string=''){
-    return this.http.get<[Product]>(environment.url+"/products"+state)
+  list(state:boolean){
+    return this.http.get<[DetailProduct]>(environment.url+"/detailproduct/"+state)
     .pipe(catchError(this.authService.httpError))
   }
-  listByCategory(categotyId:String,state:string=''){
-    return this.http.get<[Product]>(environment.url+`/products/category/${categotyId}`)
+  getDetail(id:string){
+    return this.http.get<DetailProduct>(environment.url+"/detailproduct/getDetail/"+id)
     .pipe(catchError(this.authService.httpError))
   }
-  create(body:ProductCreateRequest){
-    return this.http.post<Product>(environment.url+"/products",body)
+  create(body:DetailProductCreateRequest){
+    return this.http.post<DetailProduct>(environment.url+"/detailproduct",body)
     .pipe(catchError(this.authService.httpError))
   }
-  update(id:string,body:ProductCreateRequest){
-    return this.http.put<Product>(environment.url+"/products/"+
+  update(id:string,body:DetailProductCreateRequest){
+    return this.http.put<DetailProduct>(environment.url+"/detailproduct/"+
     id,body)
     .pipe(catchError(this.authService.httpError))
   }
   delete(id:string){
-    return this.http.delete<Product>(environment.url+"/products/"+
+    return this.http.delete<DetailProduct>(environment.url+"/detailproduct/"+
     id)
     .pipe(catchError(this.authService.httpError))
   }

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title> Agregar un Servicio</h1>
+<h1 mat-dialog-title> Agregar un Producto</h1>
 <mat-dialog-content >
     
 <form [formGroup]="loginForm">
@@ -6,31 +6,34 @@
               <tr>
                 <td>
                   <mat-form-field appearance="fill">
-                      <mat-label>Servicio</mat-label>
-                      <mat-select formControlName="serviceId" (selectionChange)="onChange($event)">
-                        <ng-container *ngFor="let item of serviceData; let i = index">
+                      <mat-label>Categoria</mat-label>
+                      <mat-select formControlName="categoryId" (selectionChange)="onChange($event)">
+                        <ng-container *ngFor="let item of categoryData; let i = index">
 
-                          <mat-option [value]="item.id">{{item.name+' '+ item.price+' Bs.'}}</mat-option>
+                          <mat-option [value]="item.id">{{item.name}}</mat-option>
                         </ng-container>
                       </mat-select>
                       <mat-error >
-                        {{validar('El servicio ','serviceId')}}
+                        {{validar('La categoria ','categoryId')}}
                     </mat-error>
+                      <!--
+
+                       -->
                     </mat-form-field>
                </td>
                <td>
                 <mat-form-field appearance="fill">
-                    <mat-label>Casillero</mat-label>
-                    <mat-select formControlName="lockerId" multiple>
-                      <ng-container *ngFor="let item of lockerData; let i = index">
+                    <mat-label>Product</mat-label>
+                    <mat-select formControlName="productId" (selectionChange)="onChangeProduct($event)">
+                      <ng-container *ngFor="let item of productData; let i = index">
               
-                          <mat-option [value]="item.id">{{'Nº '+item.code+' '+(item.type=="0"?'Mascilino':(item.type=="1"?'Femenino':'Privado')) }}</mat-option>
+                          <mat-option [value]="item.id">{{'Nº '+item.name+' '+(item.price==0) }}</mat-option>
                           
                         
                       </ng-container>
                     </mat-select>
                     <mat-error >
-                      {{validar('El casillero ','lockerId')}}
+                      {{validar('El producto ','productId')}}
                   </mat-error>
                   </mat-form-field>
              </td>
@@ -43,12 +46,11 @@
                     </mat-error>
                   </mat-form-field>
               </td></tr>
-              <tr *ngIf="!!serviceSelect" ><td>{{serviceSelect.type==0?'Publico':'Privado'}} {{serviceSelect.name}}</td> <td colspan="2">{{serviceSelect.description}} </td></tr>
-              <tr><td *ngIf="!!serviceSelect">
-                 <mat-divider></mat-divider>
+              <tr *ngIf="!!productSelect" ><td>{{productSelect.name}}</td> <td colspan="2">{{productSelect.description}} </td></tr>
+              <tr><td *ngIf="!!productSelect">
                   <mat-form-field class="example-full-width" >
                   <mat-label>Precio</mat-label>
-                  <input [value]="serviceSelect.price?serviceSelect.price:0" placeholder="Precio" type="number" matInput  disabled>
+                  <input [value]="productSelect.price?productSelect.price:0" placeholder="Precio" type="number" matInput  disabled>
                   
                </mat-form-field></td>
               </tr>

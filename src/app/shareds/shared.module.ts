@@ -15,11 +15,14 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDividerModule} from '@angular/material/divider';
 
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ValidationComponent } from '../components/validation/validation.component';
 import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog } from '../components/dialogs/dialogs.component';
 import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
+import { DetailProductDialog } from '../components/dialogs/detailProduct/detailProduct.dialog';
 @NgModule({
  imports:      [ 
     CommonModule,
@@ -37,6 +40,8 @@ import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
     MatDialogModule,
     MatMenuModule,
     MatProgressBarModule,
+    MatTooltipModule,
+    MatDividerModule,
 ],
  declarations: [
     NavBarComponent,
@@ -46,6 +51,7 @@ import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
     CustomerDialog,
     ProductDialog,
     DetailDialog,
+    DetailProductDialog,
 ],
  exports:      [
      MatToolbarModule,
@@ -70,7 +76,10 @@ import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
      MatProgressBarModule,
      ProductDialog,
      DetailDialog,
+     DetailProductDialog,
      ReactiveFormsModule,
+     MatTooltipModule,
+     MatDividerModule
     ]
 })
 export class SharedModule { }
