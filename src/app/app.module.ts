@@ -10,9 +10,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { JwtInterceptorInterceptor } from './jwt-interceptor.interceptor';
 
 import { SharedModule } from './shareds/shared.module';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,11 @@ import { SharedModule } from './shareds/shared.module';
   providers: [CookieService,
     {
       provide:HTTP_INTERCEPTORS,useClass:JwtInterceptorInterceptor,multi:true
-    }],
+    },
+    {
+      provide:MAT_DATE_LOCALE,useValue:'es-MX'
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

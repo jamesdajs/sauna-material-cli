@@ -7,9 +7,15 @@
 
 @include mat.core();
 
-@include mat.core-theme(light.$my-app-light-theme);
-@include mat.button-theme(light.$my-app-light-theme);
+//@include mat.core-theme(light.$my-app-light-theme);
+//@include mat.button-theme(light.$my-app-light-theme);
 
 body {
     margin: 0
+}
+
+.textTitle {
+    font-size: x-large;
+    padding: 12px;
+    text-transform: capitalize;
 }

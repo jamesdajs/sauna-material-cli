@@ -17,12 +17,16 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import {MatNativeDateModule} from '@angular/material/core';
 
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ValidationComponent } from '../components/validation/validation.component';
 import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog } from '../components/dialogs/dialogs.component';
 import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
 import { DetailProductDialog } from '../components/dialogs/detailProduct/detailProduct.dialog';
+import { DateStringPipe } from '../pipes/date-string.pipe';
+import { HourStringPipe } from '../pipes/hour-string.pipe';
 @NgModule({
  imports:      [ 
     CommonModule,
@@ -42,6 +46,8 @@ import { DetailProductDialog } from '../components/dialogs/detailProduct/detailP
     MatProgressBarModule,
     MatTooltipModule,
     MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 ],
  declarations: [
     NavBarComponent,
@@ -52,6 +58,8 @@ import { DetailProductDialog } from '../components/dialogs/detailProduct/detailP
     ProductDialog,
     DetailDialog,
     DetailProductDialog,
+    DateStringPipe,
+    HourStringPipe
 ],
  exports:      [
      MatToolbarModule,
@@ -79,7 +87,12 @@ import { DetailProductDialog } from '../components/dialogs/detailProduct/detailP
      DetailProductDialog,
      ReactiveFormsModule,
      MatTooltipModule,
-     MatDividerModule
+     MatDividerModule,
+     MatDatepickerModule,
+     MatNativeDateModule,
+
+     DateStringPipe,
+     HourStringPipe
     ]
 })
 export class SharedModule { }
