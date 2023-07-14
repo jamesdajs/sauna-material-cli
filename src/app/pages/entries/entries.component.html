@@ -1,3 +1,5 @@
+<p class="textTitle" >Entradas</p>
+
 <mat-form-field>
     <mat-label>Buscar</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ej. CI o nombre" #input>
@@ -41,14 +43,14 @@
           <mat-menu #menu="matMenu">
             <button (click)="details(row)"  mat-menu-item>
               <mat-icon color="primary">info</mat-icon>
-              <span>Ver Detalle</span>
+              <span>Detalle de entrada</span>
             </button>
 
             
             <button (click)="openDialog(row)"  mat-menu-item>
               
               <mat-icon color="warn"  >{{row.state?'delete':'check_circle'}}</mat-icon>
-              <span>{{row.state?'Deshabilitar':'Habilitar'}}</span>
+              <span>{{row.state?'Cerrar entrada':'Cerrado'}}</span>
             </button>
           </mat-menu>
         </td>

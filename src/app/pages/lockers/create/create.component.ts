@@ -22,7 +22,7 @@ export class CreateComponent {
     ) {
 
       this.loginForm = this.formBuilder.group({
-        code: ['',[Validators.minLength(1),Validators.maxLength(3),Validators.pattern(/^([0-9])*$/)]],
+        code: ['',[Validators.required, Validators.minLength(1),Validators.maxLength(3),Validators.pattern(/^([0-9])*$/)]],
         type: ['',[Validators.required]],
         observation:['']
       });

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/f
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertDialog } from 'src/app/components/dialogs/dialogs.component';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
     private authservice:AuthService,
     private formBuilder:FormBuilder,
     private cookieService:CookieService,
-    private router:Router
+    private router:Router,
+    private dialog: MatDialog
     ) {
 
       this.loginForm = this.formBuilder.group({
@@ -27,7 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   login(){
-      
+      console.log(this.loginForm.value)
       this.authservice.login(this.loginForm.value)
       .subscribe({
         next: (res:any) => {
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit {
           console.log(res);
         },
         error: (e) => {
+          this.openAlertDialog()
           console.log(e);
         },
         complete: () => {
@@ -45,5 +49,14 @@ export class LoginComponent implements OnInit {
     }
     formError(name:string){
       return this.loginForm.controls[name].errors as ValidationErrors
+    }
+    openAlertDialog(): void {
+      const dialogRef = this.dialog.open(AlertDialog, {
+        data: {title: "Sauna Florida", message: "El usuario y/o contraseña son incorrectos"},
+      });
+  
+      dialogRef.afterClosed().subscribe(_ => {
+        console.log('The dialog was closed');
+      });
     }
 }

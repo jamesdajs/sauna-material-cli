@@ -4,12 +4,15 @@
     <mat-grid-list cols="1" rowHeight="400px">
       <mat-grid-tile>
           <table>
-            <tr><th colspan="3"><h4 align="left">ModificarCasillero</h4></th></tr>
+            <tr><th colspan="3"><h4 align="left">Modificar Casillero</h4></th></tr>
               <tr>
                <td>
                   <mat-form-field class="example-full-width">
                       <mat-label>Codigo</mat-label>
                       <input formControlName="code" matInput placeholder="01" value="">
+                      <mat-error >
+                        {{validar('El codiigo ','code')}}
+                    </mat-error>
                     </mat-form-field>
                </td>
                <td>
@@ -21,7 +24,7 @@
                         <mat-option value="2">Privado</mat-option>
                       </mat-select>
                       <mat-error >
-                        {{validar('El genero ','type')}}
+                        {{validar('El tipo ','type')}}
                     </mat-error>
                     </mat-form-field>
                </td>
@@ -34,7 +37,7 @@
               </td></tr>
               <tr><td colspan="2">
                 <button  mat-raised-button  (click)="back()"  >Atras</button>
-                <button  mat-raised-button color="primary" (click)="create()" [disabled]="!loginForm.valid" >Modificar</button>
+                <button  mat-raised-button color="primary" (click)="create()" [disabled]="!loginForm.valid" >Modificar Casillero</button>
              </td></tr>
           </table>
           </mat-grid-tile>

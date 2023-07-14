@@ -22,3 +22,8 @@
   mat-form-field {
     width: 100%;
   }
+  .example-card {
+    max-width: 500px;
+
+    width: 500% !important
+  }

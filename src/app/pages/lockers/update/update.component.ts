@@ -28,7 +28,7 @@ export class UpdateComponent {
           this.id = params.get('id')!;
 
           this.loginForm = this.formBuilder.group({
-            code: [params.get('code'),[Validators.minLength(1),Validators.maxLength(3),Validators.pattern(/^([0-9])*$/)]],
+            code: [params.get('code'),[Validators.required,Validators.minLength(1),Validators.maxLength(3),Validators.pattern(/^([0-9])*$/)]],
             type: [params.get('type'),[Validators.required]],
             observation:[params.get('observation')]
           });

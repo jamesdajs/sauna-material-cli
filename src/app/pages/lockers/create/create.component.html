@@ -10,6 +10,9 @@
                   <mat-form-field class="example-full-width">
                       <mat-label>Codigo</mat-label>
                       <input formControlName="code" matInput placeholder="01" value="">
+                      <mat-error >
+                        {{validar('El codigo ','code')}}
+                    </mat-error>
                     </mat-form-field>
                </td>
                <td>
@@ -21,7 +24,7 @@
                         <mat-option value="2">Privado</mat-option>
                       </mat-select>
                       <mat-error >
-                        {{validar('El genero ','type')}}
+                        {{validar('El tipo ','type')}}
                     </mat-error>
                     </mat-form-field>
                </td>
@@ -34,7 +37,7 @@
               </td></tr>
               <tr><td colspan="2">
                 <button  mat-raised-button  (click)="back()"  >Atras</button>
-                <button  mat-raised-button color="primary" (click)="create()" [disabled]="!loginForm.valid" >Crear</button>
+                <button  mat-raised-button color="primary" (click)="create()" [disabled]="!loginForm.valid" >Crear Casillero</button>
              </td></tr>
           </table>
           </mat-grid-tile>
