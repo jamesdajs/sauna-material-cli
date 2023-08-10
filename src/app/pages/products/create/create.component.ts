@@ -2,6 +2,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AlertDialog } from 'src/app/components/dialogs/dialogs.component';
 import { Category } from 'src/app/interfaces/category';
@@ -32,7 +33,8 @@ export class CreateComponent {
     private formBuilder:FormBuilder,
     private router:Router,
     private errorform:ErrorFormService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar
     ) {
       this.loginForm = this.formBuilder.group({
         name: ['', [Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
@@ -152,6 +154,7 @@ export class CreateComponent {
       
       error: (e) => {
         console.log(e);
+        this._snackBar.open(e.error.message, "ok")
       },
       complete: () => {
         this.openAlertDialog()
@@ -174,4 +177,5 @@ export class CreateComponent {
   back(){
     this.router.navigate(["/products"])
   }
+
 }

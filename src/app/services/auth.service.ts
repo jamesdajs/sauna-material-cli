@@ -10,7 +10,9 @@ import { throwError } from 'rxjs';
 })
 export class AuthService {
 
-  constructor(private http :HttpClient,private cookieService:CookieService,private router:Router) { }
+  constructor(private http :HttpClient,private cookieService:CookieService,private router:Router
+    ) { }
+  
   login(body:any){
     return this.http.post(environment.url+"/auth/singin",body)
   }

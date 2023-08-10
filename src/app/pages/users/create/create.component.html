@@ -17,7 +17,7 @@
                             <mat-label>Nombre de usuario</mat-label>
                             <input formControlName="username" matInput placeholder="Nombre de usuario">
                             <mat-error>
-                                {{validar('El nombre de usuario ','name')}}
+                                {{validar('El nombre de usuario ','username')}}
                             </mat-error>
                         </mat-form-field>
                     </td>
@@ -26,7 +26,7 @@
                             <mat-label>Contraseña</mat-label>
                             <input formControlName="password" matInput placeholder="Contraseña">
                             <mat-error>
-                                {{validar('La contraseña ','name')}}
+                                {{validar('La contraseña ','password')}}
                             </mat-error>
                         </mat-form-field>
                     </td>
@@ -85,7 +85,7 @@
                     <td colspan="2">
                         <mat-form-field>
                             <mat-label>Elige la fecha</mat-label>
-                            <input formControlName="birthdate" matInput [matDatepicker]="picker">
+                            <input placeholder="DD/MM/YYYY" formControlName="birthdate" matInput [matDatepicker]="picker">
                             <mat-hint>DD/MM/YYYY</mat-hint>
                             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>

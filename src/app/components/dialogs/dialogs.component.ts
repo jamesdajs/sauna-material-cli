@@ -4,6 +4,7 @@ import { Customer } from 'src/app/interfaces/customer';
 import * as moment from 'moment';
 import { Product } from 'src/app/interfaces/product';
 import { Entry } from 'src/app/interfaces/entry';
+import { User } from 'src/app/interfaces/user';
 moment.locale('es');
 export interface DialogData {
     title: string;
@@ -70,6 +71,26 @@ export interface DialogData {
     constructor(
       public dialogRef: MatDialogRef<ProductDialog>,
       @Inject(MAT_DIALOG_DATA) public data: Product,
+    ) {}
+  
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+    formatDate(date:string){
+      let m = moment(date);
+      return m.format('LLL');
+    }
+  }
+  @Component({
+    selector: 'user-dialog',
+    templateUrl: 'user.dialog.html',
+  })
+  //customer
+  export class UserDialog {
+    
+    constructor(
+      public dialogRef: MatDialogRef<ProductDialog>,
+      @Inject(MAT_DIALOG_DATA) public data: User,
     ) {}
   
     onNoClick(): void {

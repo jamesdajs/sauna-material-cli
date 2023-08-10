@@ -80,5 +80,30 @@ export class EntriesComponent {
 
     this.router.navigate(["/entries/details/",{id:entry.id}])
   }
+  changeStateEntry(entry:Entry){
 
+    this.entryService.closeEntry(entry.id)
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        this.loadData()
+      }
+  })
+}
+openAlertExitDialog(entry:Entry) : void {
+  const dialogRef = this.dialog.open(ConfirmDialog, {
+    data: {title: "Sauna Florida",message: `Seguro que el cliente ${entry.customer.name} esta saliendo del sauna?`},
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed',entry.customer.name);
+    if(!!result)
+      this.changeStateEntry(entry)
+  });
+}
 }

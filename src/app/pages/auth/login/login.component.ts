@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertDialog } from 'src/app/components/dialogs/dialogs.component';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,9 @@ export class LoginComponent implements OnInit {
     private formBuilder:FormBuilder,
     private cookieService:CookieService,
     private router:Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    
+    private navService:NavService
     ) {
 
       this.loginForm = this.formBuilder.group({
@@ -35,6 +38,7 @@ export class LoginComponent implements OnInit {
       .subscribe({
         next: (res:any) => {
           this.cookieService.set("token",res.data.token)
+          this.navService.setUser(res.data.user)
           console.log(res);
         },
         error: (e) => {

@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { ConfirmDialog } from 'src/app/components/dialogs/dialogs.component';
+import { ConfirmDialog, UserDialog } from 'src/app/components/dialogs/dialogs.component';
 import { User } from 'src/app/interfaces/user';
 import { UserService } from 'src/app/services/user.service';
 
@@ -60,7 +60,17 @@ create(){
   this.router.navigate(["/users/create"])
 }
 update(user:User){
-  this.router.navigate(["/users/update/",user])
+  let roleId = user.role.id
+  let usersend:any = user
+  usersend.roleId = roleId
+  this.router.navigate(["/users/update/",usersend])
+}
+updatePassword(user:User){
+  let data = {
+    id:user.data.id,
+    username:user.data.username,
+  }
+  this.router.navigate(["/users/dataupdate/",data])
 }
 openDialog(user:User): void {
   const dialogRef = this.dialog.open(ConfirmDialog, {
@@ -73,6 +83,15 @@ openDialog(user:User): void {
       this.userService.update(user.id,{state:!user.state})
       .subscribe(result => { user.state=!user.state })
     }
+  });
+}
+openUserDialog(user:User):void {
+  const dialogRef = this.dialog.open(UserDialog, {
+    data:user,
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
   });
 }
 }

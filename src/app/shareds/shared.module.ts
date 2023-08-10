@@ -19,10 +19,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker'
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ValidationComponent } from '../components/validation/validation.component';
-import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog } from '../components/dialogs/dialogs.component';
+import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog, UserDialog } from '../components/dialogs/dialogs.component';
 import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
 import { DetailProductDialog } from '../components/dialogs/detailProduct/detailProduct.dialog';
 import { DateStringPipe } from '../pipes/date-string.pipe';
@@ -47,7 +48,8 @@ import { HourStringPipe } from '../pipes/hour-string.pipe';
     MatTooltipModule,
     MatDividerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
 ],
  declarations: [
     NavBarComponent,
@@ -55,6 +57,7 @@ import { HourStringPipe } from '../pipes/hour-string.pipe';
     AlertDialog,
     ConfirmDialog,
     CustomerDialog,
+    UserDialog,
     ProductDialog,
     DetailDialog,
     DetailProductDialog,
@@ -80,6 +83,7 @@ import { HourStringPipe } from '../pipes/hour-string.pipe';
      AlertDialog,
      ConfirmDialog,
      CustomerDialog,
+     UserDialog,
      MatMenuModule,
      MatProgressBarModule,
      ProductDialog,
@@ -90,7 +94,8 @@ import { HourStringPipe } from '../pipes/hour-string.pipe';
      MatDividerModule,
      MatDatepickerModule,
      MatNativeDateModule,
-
+     MatSnackBarModule,
+     
      DateStringPipe,
      HourStringPipe
     ]

@@ -1,0 +1,42 @@
+<p class="textTitle" >Crear usuario</p>
+
+<form [formGroup]="loginForm">
+
+    <mat-grid-list cols="1" rowHeight="600px">
+        <mat-grid-tile>
+            <table style="width: 600px;">
+                <tr>
+                    <th colspan="6">
+                        <h4 align="left">Datos de inicio de sesión</h4>
+                        <mat-divider></mat-divider>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Nombre de usuario</mat-label>
+                            <input formControlName="username"  matInput placeholder="Nombre de usuario">
+
+                        </mat-form-field>
+                    </td>
+                    <td colspan="3">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Contraseña</mat-label>
+                            <input formControlName="password" matInput placeholder="Contraseña">
+                            <mat-error>
+                                {{validar('La contraseña ','password')}}
+                            </mat-error>
+                        </mat-form-field>
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                    <td colspan="6">
+                        <button mat-raised-button (click)="back()">Atras</button>
+                        <button mat-raised-button color="primary" (click)="update()" [disabled]="!loginForm.valid">Modificar Contraseña</button>
+                    </td>
+                </tr>
+            </table>
+        </mat-grid-tile>
+    </mat-grid-list>

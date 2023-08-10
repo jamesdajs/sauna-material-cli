@@ -1,0 +1,173 @@
+<!-- -->
+<ng-container *ngIf="!loading; else elseTemplate">
+    <mat-grid-list cols="2" rowHeight="100px">
+      <mat-grid-tile>
+        <table>
+          <tr>
+            <th colspan="2"> Datos del cliente </th>
+          </tr>
+          <tr>
+            <th>Nombre:</th>
+            <td>{{entry.customer.name}}</td>
+          </tr>
+        </table>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <table>
+          <tr>
+            <th colspan="2"> Datos del usuario </th>
+          </tr>
+          <tr>
+            <th>Nombre</th>
+            <td>{{entry.user.name}}</td>
+          </tr>
+        </table>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2">
+ 
+        <div class="button-add">
+          Total pagado: {{getTotalCost() + getTotalCostProducts() }} Bs.
+        </div>
+            <div class="button-add noPrint">
+                <button mat-fab extended color="primary" onclick="window.print();">
+                 
+                  Imprimir
+                </button>
+              </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-divider></mat-divider>
+  <div class="titledet" >
+    Detalle de las entradas
+  </div>
+    <mat-divider></mat-divider>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" matSort>
+  
+        <!-- Progress Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let row"> {{row.service.name + ' '+ (row.service.type==0?'Publico':'Privado')}}
+  
+  
+          </td>
+          <td mat-footer-cell *matFooterCellDef> Total </td>
+        </ng-container>
+        <ng-container matColumnDef="lockers">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Casilleros </th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-raised-button *ngFor="let item of row.lockers"
+              [color]="item.type==0?'primary':item.type==1?'accent':'warn'"
+              [matTooltip]="item.type==0?'Masculino':item.type==1?'Femenino':'Privado'" aria-label="Button">
+              {{item.code}}
+            </button>
+          </td>
+  
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+          <td mat-cell *matCellDef="let row"> {{row.price}} Bs. </td>
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+        <ng-container matColumnDef="cant">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+          <td mat-cell *matCellDef="let row"> {{row.cant}} </td>
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+          <td mat-cell *matCellDef="let row"> {{row.cant*row.price}} Bs.</td>
+          <td mat-footer-cell *matFooterCellDef> {{getTotalCost() }} Bs.</td>
+        </ng-container>
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+          <td mat-cell *matCellDef="let row">
+            <ng-container *ngIf="row.state == true; else elseTemplate">
+              <mat-icon color="primary">check</mat-icon>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <mat-icon color="warn">close</mat-icon>
+            </ng-template>
+          </td>
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+  
+        
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No tiene datos registrados</td>
+        </tr>
+      </table>
+    </div>
+  
+    <mat-divider></mat-divider>
+    <div class="titledet">Detalle de Productos
+  
+    </div>
+  
+    <mat-divider></mat-divider>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataProductSource" matSort>
+  
+        <!-- Progress Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let row"> {{row.product.name}} </td>
+          <td mat-footer-cell *matFooterCellDef> Total </td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Precio </th>
+          <td mat-cell *matCellDef="let row"> {{row.price}} Bs. </td>
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+        <ng-container matColumnDef="cant">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad </th>
+          <td mat-cell *matCellDef="let row"> {{row.cant}} </td>
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+          <td mat-cell *matCellDef="let row"> {{row.cant*row.price}} Bs. </td>
+          <td mat-footer-cell *matFooterCellDef> {{getTotalCostProducts() }} Bs. </td>
+        </ng-container>
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+          <td mat-cell *matCellDef="let row">
+            <ng-container *ngIf="row.state == 0;  ">
+              <button mat-flat-button >Pedido</button>
+            </ng-container>
+            <ng-container *ngIf="row.state == 1;  ">
+              <button mat-flat-button color="accent" >Preparando</button>
+            </ng-container>
+            <ng-container *ngIf="row.state == 2; ">
+              <button mat-flat-button color="primary">Entregado</button>
+            </ng-container>
+            
+          </td>
+          <td mat-footer-cell *matFooterCellDef> </td>
+        </ng-container>
+  
+
+  
+        <tr mat-header-row *matHeaderRowDef="displayedProductColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedProductColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedProductColumns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="5"> No tiene datos registrados</td>
+        </tr>
+  
+      </table>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-template>

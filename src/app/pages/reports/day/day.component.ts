@@ -55,6 +55,7 @@ export class DayComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-  detail(dateIn:Date){
+  detail(entriId:number){
+    this.router.navigate(['reports/day/user',{id:entriId}])
   }
 }

@@ -27,7 +27,7 @@
                     <mat-select formControlName="productId" (selectionChange)="onChangeProduct($event)">
                       <ng-container *ngFor="let item of productData; let i = index">
               
-                          <mat-option [value]="item.id">{{'Nº '+item.name+' '+(item.price==0) }}</mat-option>
+                          <mat-option [value]="item.id">{{'Nº '+item.name+' '+(item.price) }} Bs</mat-option>
                           
                         
                       </ng-container>

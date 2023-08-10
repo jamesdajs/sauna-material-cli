@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AlertDialog } from 'src/app/components/dialogs/dialogs.component';
 import { Role } from 'src/app/interfaces/Role';
@@ -20,7 +21,8 @@ export class CreateComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private errorform: ErrorFormService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {
 
     this.loginForm = this.formBuilder.group({
@@ -61,6 +63,7 @@ export class CreateComponent {
 
         error: (e) => {
           console.log(e);
+          this._snackBar.open(e.error.message, "ok")
         },
         complete: () => {
           this.openAlertDialog()
@@ -77,10 +80,10 @@ export class CreateComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.router.navigate(["/customers"])
+      this.router.navigate(["/users"])
     });
   }
   back() {
-    this.router.navigate(["/customers"])
+    this.router.navigate(["/users"])
   }
 }

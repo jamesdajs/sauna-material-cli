@@ -1,15 +1,25 @@
 <mat-toolbar color="accent">
  <span>Sauna Florida</span>
  <span class="example-spacer"></span>
- <button mat-button (click)="redirec('users')">Usuarios </button>
- <button mat-button (click)="redirec('customers')">Clientes</button>
- <button mat-button (click)="redirec('categories')">Categorias de productos </button>
- <button mat-button (click)="redirec('products')">Productos </button>
- <button mat-button (click)="redirec('lockers')">Casilleros </button>
- <button mat-button (click)="redirec('services')">Servicios </button>
- <button mat-button (click)="redirec('entries')">Entradas </button>
- <button mat-button (click)="redirec('reports')">Reportes </button>
- <button mat-icon-button (click)="logout()" class="example-icon" aria-label="Example icon-button with logout icon">
-  <mat-icon>logout</mat-icon>
-</button>
+
+ <ng-container *ngIf="isAuth; " >
+    <div class="noPrint">
+
+        <button mat-button *ngIf="role=='admin'" (click)="redirec('users')">Usuarios </button>
+        <button mat-button  (click)="redirec('customers')">Clientes</button>
+        <button mat-button *ngIf="role=='admin'" (click)="redirec('categories')">Categorias de productos </button>
+        <button mat-button *ngIf="role=='admin'" (click)="redirec('products')">Productos </button>
+        <button mat-button *ngIf="role=='admin' || role=='receptionist'" (click)="redirec('lockers')">Casilleros </button>
+        <button mat-button *ngIf="role=='admin'" (click)="redirec('services')">Servicios </button>
+        <button mat-button (click)="redirec('entries')">Entradas </button>
+        <button mat-button (click)="redirec('reports')">Reportes </button>
+        <button mat-icon-button (click)="logout()" class="example-icon" aria-label="Example icon-button with logout icon">
+         <mat-icon>logout</mat-icon>
+        </button>
+    </div>
+ </ng-container>
+
+ 
+
+
 </mat-toolbar>
