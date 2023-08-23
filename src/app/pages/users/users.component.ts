@@ -65,6 +65,9 @@ update(user:User){
   usersend.roleId = roleId
   this.router.navigate(["/users/update/",usersend])
 }
+entries(id:number){
+  this.router.navigate(["/users/entries",{id}])
+}
 updatePassword(user:User){
   let data = {
     id:user.data.id,

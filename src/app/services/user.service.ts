@@ -16,6 +16,10 @@ export class UserService {
     return this.http.get<[User]>(environment.url+"/users"+url)
     .pipe(catchError(this.authService.httpError))
   }
+  getUserEntry(id:number,query=""){
+    return this.http.get<User>(environment.url+"/users/entry/"+id+query)
+    .pipe(catchError(this.authService.httpError))
+  }
   getRole(){
     return this.http.get<[Role]>(environment.url+"/users/role")
     .pipe(catchError(this.authService.httpError))

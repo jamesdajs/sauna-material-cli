@@ -15,6 +15,10 @@ export class CustomerService {
     return this.http.get<[Customer]>(environment.url+"/customers")
     .pipe(catchError(this.authService.httpError))
   }
+  getCustomerEntry(id:number,query=""){
+    return this.http.get<Customer>(environment.url+"/customers/entry/"+id+query)
+    .pipe(catchError(this.authService.httpError))
+  }
   create(body:CustomerCreateRequest){
     return this.http.post<Customer>(environment.url+"/customers",body)
     .pipe(catchError(this.authService.httpError))

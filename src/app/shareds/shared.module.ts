@@ -28,6 +28,7 @@ import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
 import { DetailProductDialog } from '../components/dialogs/detailProduct/detailProduct.dialog';
 import { DateStringPipe } from '../pipes/date-string.pipe';
 import { HourStringPipe } from '../pipes/hour-string.pipe';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
  imports:      [ 
     CommonModule,
@@ -49,7 +50,8 @@ import { HourStringPipe } from '../pipes/hour-string.pipe';
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSortModule
 ],
  declarations: [
     NavBarComponent,
@@ -95,7 +97,7 @@ import { HourStringPipe } from '../pipes/hour-string.pipe';
      MatDatepickerModule,
      MatNativeDateModule,
      MatSnackBarModule,
-     
+     MatSortModule,
      DateStringPipe,
      HourStringPipe
     ]

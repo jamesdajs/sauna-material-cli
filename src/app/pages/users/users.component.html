@@ -58,6 +58,10 @@
             <mat-icon color="accent">info</mat-icon>
             <span>Modificar contraseña</span>
           </button>
+          <button (click)="entries(row.id)" mat-menu-item>
+            <mat-icon color="accent">info</mat-icon>
+            <span>Ver entradas registradas</span>
+          </button>
           <button (click)="openDialog(row)" mat-menu-item>
 
             <mat-icon [color]="row.state?'warn':'primary'">{{row.state?'delete':'check_circle'}}</mat-icon>

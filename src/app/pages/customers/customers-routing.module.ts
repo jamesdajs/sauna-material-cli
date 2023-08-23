@@ -4,22 +4,28 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 import { CustomersComponent } from './customers.component';
 
 const routes: Routes = [
-  { 
+  {
     path: '',
-   component: CustomersComponent 
+    component: CustomersComponent
   },
-  { 
+  {
     path: 'create',
     loadChildren: () => import('./create/create.module').then(m => m.CreateModule),
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
-  { 
-    path: 'update', 
-    loadChildren: () => import('./update/update.module').then(m => m.UpdateModule) ,
-    canActivate:[AuthGuard]
-},
+  {
+    path: 'update',
+    loadChildren: () => import('./update/update.module').then(m => m.UpdateModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'entries',
+    loadChildren: () => import('./entry/entry.module').then(m => m.EntryModule),
+    canActivate: [AuthGuard]
+  },
 
-  ];
+
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

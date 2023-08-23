@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           console.log(res);
         },
         error: (e) => {
-          this.openAlertDialog()
+          this.openAlertDialog(e.error.message);
           console.log(e);
         },
         complete: () => {
@@ -54,9 +54,9 @@ export class LoginComponent implements OnInit {
     formError(name:string){
       return this.loginForm.controls[name].errors as ValidationErrors
     }
-    openAlertDialog(): void {
+    openAlertDialog(msg:string): void {
       const dialogRef = this.dialog.open(AlertDialog, {
-        data: {title: "Sauna Florida", message: "El usuario y/o contraseña son incorrectos"},
+        data: {title: "Sauna Florida", message: msg},
       });
   
       dialogRef.afterClosed().subscribe(_ => {

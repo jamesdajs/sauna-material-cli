@@ -1,3 +1,5 @@
+import { Entry } from "./entry"
+
 export interface Customer {
     id:string
     name: string
@@ -6,6 +8,8 @@ export interface Customer {
     observation?:string
     gender:number
     state:boolean
+
+    entries:Entry[]
     createAt:string
   }
   export interface CustomerListResponse {

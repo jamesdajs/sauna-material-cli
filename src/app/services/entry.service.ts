@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { Entry, EntryCreateRequest } from '../interfaces/entry';
 import { AuthService } from './auth.service';
 import { ReportDayDetailResponse } from '../interfaces/report';
+import { Product } from '../interfaces/product';
+import { Service } from '../interfaces/service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +42,18 @@ export class EntryService {
   }
   report(query=""){
     return this.http.get<[Entry]>(environment.url+"/reports"+query)
+    .pipe(catchError(this.authService.httpError))
+  }
+  reportProduct(query=""){
+    return this.http.get<[Product]>(environment.url+"/reports/product"+query)
+    .pipe(catchError(this.authService.httpError))
+  }
+  reportService(query=""){
+    return this.http.get<[Service]>(environment.url+"/reports/service"+query)
+    .pipe(catchError(this.authService.httpError))
+  }
+  reportCustomer(query=""){
+    return this.http.get<[Entry]>(environment.url+"/reports/customer"+query)
     .pipe(catchError(this.authService.httpError))
   }
   reportDay(date="31"){

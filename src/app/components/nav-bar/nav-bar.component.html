@@ -1,25 +1,43 @@
 <mat-toolbar color="accent">
- <span>Sauna Florida</span>
- <span class="example-spacer"></span>
+    <span>Sauna Florida</span>
+    <span class="example-spacer"></span>
 
- <ng-container *ngIf="isAuth; " >
-    <div class="noPrint">
+    <ng-container *ngIf="isAuth; ">
+        <div class="noPrint">
 
-        <button mat-button *ngIf="role=='admin'" (click)="redirec('users')">Usuarios </button>
-        <button mat-button  (click)="redirec('customers')">Clientes</button>
-        <button mat-button *ngIf="role=='admin'" (click)="redirec('categories')">Categorias de productos </button>
-        <button mat-button *ngIf="role=='admin'" (click)="redirec('products')">Productos </button>
-        <button mat-button *ngIf="role=='admin' || role=='receptionist'" (click)="redirec('lockers')">Casilleros </button>
-        <button mat-button *ngIf="role=='admin'" (click)="redirec('services')">Servicios </button>
-        <button mat-button (click)="redirec('entries')">Entradas </button>
-        <button mat-button (click)="redirec('reports')">Reportes </button>
-        <button mat-icon-button (click)="logout()" class="example-icon" aria-label="Example icon-button with logout icon">
-         <mat-icon>logout</mat-icon>
-        </button>
-    </div>
- </ng-container>
+            <button mat-button *ngIf="role=='admin'" (click)="redirec('users')">Usuarios </button>
+            <button mat-button (click)="redirec('customers')">Clientes</button>
 
- 
+            <button mat-button [matMenuTriggerFor]="menuc">Gestiones
+                <mat-icon>expand_more</mat-icon>
+            </button>
+            <mat-menu #menuc="matMenu">
+                <button mat-menu-item *ngIf="role=='admin'" (click)="redirec('categories')">Categorias de productos </button>
+                <button mat-menu-item *ngIf="role=='admin'" (click)="redirec('products')">Productos </button>
+                <button mat-menu-item *ngIf="role=='admin' || role=='receptionist'" (click)="redirec('lockers')">Casilleros
+                </button>
+                <button mat-menu-item *ngIf="role=='admin'" (click)="redirec('services')">Servicios </button>
+
+            </mat-menu>
+            
+            <button mat-button (click)="redirec('entries')">Entradas </button>
+            <button mat-button [matMenuTriggerFor]="menu">Reportes
+                <mat-icon>expand_more</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="redirec('reports')">Reprotes Diarios</button>
+                <button mat-menu-item (click)="redirec('reports/product')">Reportes de Productos</button>
+                <button mat-menu-item (click)="redirec('reports/service')">Reportes de Servicios</button>
+                <button mat-menu-item (click)="redirec('reports/customer')">Clientes </button>
+            </mat-menu>
+            <button mat-icon-button (click)="logout()" class="example-icon"
+                aria-label="Example icon-button with logout icon">
+                <mat-icon>logout</mat-icon>
+            </button>
+        </div>
+    </ng-container>
+
+
 
 
 </mat-toolbar>

@@ -6,6 +6,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AlertDialog, ConfirmDialog, CustomerDialog } from 'src/app/components/dialogs/dialogs.component';
 import { Customer, CustomerCreateRequest } from 'src/app/interfaces/customer';
+import { Entry } from 'src/app/interfaces/entry';
 import { CustomerService } from 'src/app/services/customer.service';
 import { EntryService } from 'src/app/services/entry.service';
 
@@ -62,6 +63,10 @@ export class CustomersComponent {
   create(){
     this.router.navigate(["/customers/create"])
   }
+  entries(id:number){
+    this.router.navigate(["/customers/entries",{id}])
+  }
+  
   update(customer:Customer){
     this.router.navigate(["/customers/update/",customer])
   }

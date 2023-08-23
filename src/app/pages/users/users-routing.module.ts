@@ -18,10 +18,16 @@ const routes: Routes = [
     loadChildren: () => import('./update/update.module').then(m => m.UpdateModule),
     canActivate: [AuthGuard]
   },
-  { path: 'dataupdate', 
-  loadChildren: () => import('./data-update/data-update.module').then(m => m.DataUpdateModule) ,
-  canActivate: [AuthGuard]
-},
+  {
+    path: 'dataupdate',
+    loadChildren: () => import('./data-update/data-update.module').then(m => m.DataUpdateModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'entries',
+    loadChildren: () => import('./entry/entry.module').then(m => m.EntryModule),
+    canActivate: [AuthGuard]
+  },
 
 ];
 

@@ -54,7 +54,10 @@
             <mat-icon color="accent">edit</mat-icon>
             <span>Modificar</span>
           </button>
-
+          <button (click)="entries(row.id)" mat-menu-item>
+            <mat-icon color="accent">info</mat-icon>
+            <span>Ver entradas</span>
+          </button>
           <button (click)="openDialog(row)" mat-menu-item>
 
             <mat-icon [color]="row.state?'warn':'primary'">{{row.state?'delete':'check_circle'}}</mat-icon>

@@ -5,12 +5,32 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [{ path: '', component: ReportsComponent },
 {
-    path: 'day',
+  path: 'day',
 
-    loadChildren: () => import('./day/day.module').then(m => m.DayModule),
-    canActivate: [AuthGuard]
+  loadChildren: () => import('./day/day.module').then(m => m.DayModule),
+  canActivate: [AuthGuard]
 },
-{ path: 'detail', loadChildren: () => import('./day-detail/day-detail.module').then(m => m.DayDetailModule), canActivate: [AuthGuard] },
+{
+  path: 'detail',
+  loadChildren: () => import('./day-detail/day-detail.module').then(m => m.DayDetailModule),
+  canActivate: [AuthGuard]
+},
+{
+  path: 'product',
+  loadChildren: () => import('./product/product.module').then(m => m.ProductModule),
+  canActivate: [AuthGuard]
+},
+{
+  path: 'service',
+  loadChildren: () => import('./service/service.module').then(m => m.ServiceModule),
+  canActivate: [AuthGuard]
+},
+{
+  path: 'customer',
+  loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule),
+  canActivate: [AuthGuard]
+},
+
 
 ];
 @NgModule({
