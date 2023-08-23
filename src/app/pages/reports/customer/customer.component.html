@@ -38,7 +38,24 @@
         <td mat-cell *matCellDef="let row"> {{row.total}} </td>
         <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
       </ng-container>
-
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            
+            <button (click)="entries(row.id)" mat-menu-item>
+              <mat-icon color="accent">info</mat-icon>
+              <span>Ver entradas registradas</span>
+            </button>
+            
+          </mat-menu>
+          
+        </td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -48,4 +65,10 @@
         <td class="mat-cell" colspan="4">No tiene datos registrados</td>
       </tr>
     </table>
+  </div>
+  <div class="button-add noPrint">
+    <button mat-fab extended color="primary" onclick="window.print();">
+     
+      Imprimir
+    </button>
   </div>

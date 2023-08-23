@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Entry } from 'src/app/interfaces/entry';
 import { EntryService } from 'src/app/services/entry.service';
 
@@ -13,9 +14,11 @@ export class CustomerComponent {
   @ViewChild(MatSort) sort: MatSort;
   dateIni:String = ''
   dateEnd:String = ''
-  displayedColumns: string[] = [ 'id','ci','name', 'total'];
+  displayedColumns: string[] = [ 'id','ci','name', 'total','options'];
   dataSource: MatTableDataSource<Entry>;
-  constructor(public entryService: EntryService) {}
+  constructor(public entryService: EntryService,
+              private router: Router
+    ) {}
   ngAfterViewInit() {
     this.loadData()
   
@@ -56,6 +59,9 @@ export class CustomerComponent {
         console.log('done')
       },
     })
+  }
+  entries(id:number){
+    this.router.navigate(["/customers/entries",{id}])
   }
 }
 
