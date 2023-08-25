@@ -1,66 +1,92 @@
 <h1 mat-dialog-title> Agregar un Producto</h1>
-<mat-dialog-content >
-    
-<form [formGroup]="loginForm">
-          <table>
-              <tr>
-                <td>
-                  <mat-form-field appearance="fill">
-                      <mat-label>Categoria</mat-label>
-                      <mat-select formControlName="categoryId" (selectionChange)="onChange($event)">
-                        <ng-container *ngFor="let item of categoryData; let i = index">
+<mat-dialog-content>
 
-                          <mat-option [value]="item.id">{{item.name}}</mat-option>
-                        </ng-container>
-                      </mat-select>
-                      <mat-error >
-                        {{validar('La categoria ','categoryId')}}
-                    </mat-error>
-                      <!--
+  <form [formGroup]="loginForm">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Categoria</mat-label>
+            <mat-select formControlName="categoryId" (selectionChange)="onChange($event)">
+              <ng-container *ngFor="let item of categoryData; let i = index">
+
+                <mat-option [value]="item.id">{{item.name}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>
+              {{validar('La categoria ','categoryId')}}
+            </mat-error>
+            <!--
 
                        -->
-                    </mat-form-field>
-               </td>
-               <td>
-                <mat-form-field appearance="fill">
-                    <mat-label>Product</mat-label>
-                    <mat-select formControlName="productId" (selectionChange)="onChangeProduct($event)">
-                      <ng-container *ngFor="let item of productData; let i = index">
-              
-                          <mat-option [value]="item.id">{{'Nº '+item.name+' '+(item.price) }} Bs</mat-option>
-                          
-                        
-                      </ng-container>
-                    </mat-select>
-                    <mat-error >
-                      {{validar('El producto ','productId')}}
-                  </mat-error>
-                  </mat-form-field>
-             </td>
-                <td >
-                  <mat-form-field class="example-full-width">
-                      <mat-label>Cantidad</mat-label>
-                      <input formControlName="cant" type="number" matInput placeholder="Cantidad" >
-                      <mat-error >
-                        {{validar('La cantidad ','cant')}}
-                    </mat-error>
-                  </mat-form-field>
-              </td></tr>
-              <tr *ngIf="!!productSelect" ><td>{{productSelect.name}}</td> <td colspan="2">{{productSelect.description}} </td></tr>
-              <tr><td *ngIf="!!productSelect">
-                  <mat-form-field class="example-full-width" >
-                  <mat-label>Precio</mat-label>
-                  <input [value]="productSelect.price?productSelect.price:0" placeholder="Precio" type="number" matInput  disabled>
-                  
-               </mat-form-field></td>
-              </tr>
-              <tr><td colspan="3">
-              </td></tr>
-          </table>
-        
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Product</mat-label>
+            <mat-select formControlName="productId" (selectionChange)="onChangeProduct($event)">
+              <ng-container *ngFor="let item of productData; let i = index">
+
+                <mat-option *ngIf="item.state" [value]="item.id">{{item.name+' '+(item.price) }} Bs</mat-option>
+
+
+              </ng-container>
+            </mat-select>
+            <mat-error>
+              {{validar('El producto ','productId')}}
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Cantidad</mat-label>
+            <input formControlName="cant" type="number" matInput placeholder="Cantidad">
+            <mat-error>
+              {{validar('La cantidad ','cant')}}
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr *ngIf="!!productSelect">
+        <td>{{productSelect.name}}</td>
+        <td colspan="2">{{productSelect.description}} </td>
+      </tr>
+      <tr>
+        <td *ngIf="!!productSelect">
+          <h4>Detalle</h4>
+          <mat-list>
+            <mat-list-item>
+              <span matListItemTitle>Producto</span>
+              <span matListItemLine> {{productSelect.name}}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Precio</span>
+              <span>Bs. {{productSelect.price}}</span>
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Cantidad</span>
+              {{loginForm.value.cant}}
+            </mat-list-item>
+            <mat-list-item>
+              <span matListItemTitle>Total</span>
+              {{loginForm.value.cant*productSelect.price}}
+            </mat-list-item>
+          </mat-list>
+        </td >
+        <td *ngIf="!!productSelect">
+          <img height="200px" mat-card-image [src]="productSelect.urlImage?('http://localhost:3000/uploads/'+productSelect.urlImage):'/assets/image/product-placeholder.png'" alt="Imagen producto">
+
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+        </td>
+      </tr>
+    </table>
+
   </form>
-</mat-dialog-content >
+</mat-dialog-content>
 <div mat-dialog-actions align="end">
-    <button mat-button (click)="onNoClick()">No </button>
-    <button mat-button (click)="create()" [disabled]="!loginForm.valid" cdkFocusInitial>Si</button>
+  <button mat-button (click)="onNoClick()">No </button>
+  <button mat-button (click)="create()" [disabled]="!loginForm.valid" cdkFocusInitial>Si</button>
 </div>

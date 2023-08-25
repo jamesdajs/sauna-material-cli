@@ -21,6 +21,7 @@ import { ServiceService } from "src/app/services/service.service";
     lockerData:[Locker]
     serviceData:[Service]
     serviceSelect:Service
+    lokerSelect:Locker[]
     constructor(
       public dialogRef: MatDialogRef<DetailDialog>,
       @Inject(MAT_DIALOG_DATA) public data: Entry,
@@ -71,5 +72,11 @@ import { ServiceService } from "src/app/services/service.service";
         let service =this.serviceData.find(data => data.id==e.value)
         console.log(e,service);
         this.serviceSelect = service!
+      }
+      onChangeLocker(e:any){
+
+        let service =this.lockerData.filter(data => e.value.includes(data.id))
+        console.log(e,service);
+        this.lokerSelect = service!
       }
   }

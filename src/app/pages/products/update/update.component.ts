@@ -98,8 +98,20 @@ export class UpdateComponent {
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       this.uploadService.delete(this.imageName)
-      .subscribe(res=>{
-        console.log(res, "imagen eliminada");
+      .subscribe({
+
+        next: (res: any) => {
+          console.log(res, "imagen eliminada");
+        },
+        error: (err: any) => {
+          console.log(err);
+          
+        },
+        complete: () => {
+          console.log("done")
+        }
+
+        
         
       })
       if (file) {
@@ -131,7 +143,7 @@ export class UpdateComponent {
           complete:() => {
             let form = this.loginForm.get('urlImage')
             form?.setValue(nameResponse)
-            this.create()
+            this.update()
           }
         });
       }
@@ -139,7 +151,7 @@ export class UpdateComponent {
       this.selectedFiles = undefined;
     }else{
 
-      this.create()
+      this.update()
     }
   }
   ngOnInit(): void {
@@ -153,9 +165,9 @@ export class UpdateComponent {
       
     })
   }
-  create(){
+  update(){
 
-    this.productService.create(this.loginForm.value)
+    this.productService.update(this.id,this.loginForm.value)
     .subscribe({
       
       error: (e) => {

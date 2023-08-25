@@ -1,8 +1,8 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="container">
-  <div class="floatbuton noPrint">
-    <button mat-fab color="accent" [matMenuTriggerFor]="aboveMenu"  aria-label="Example icon button with a bookmark icon">
+  <div class="floatbuton noPrint" [matMenuTriggerFor]="aboveMenu">
+    <button mat-fab color="accent"   aria-label="Example icon button with a bookmark icon">
       <mat-icon matBadgeOverlap="false" [matBadge]="sumPerson()" matBadgeSize="large">pool</mat-icon>
     </button>
     <mat-menu #aboveMenu="matMenu" yPosition="above">

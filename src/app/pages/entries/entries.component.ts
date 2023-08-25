@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { AlertDialog, ConfirmDialog, CustomerDialog } from 'src/app/components/dialogs/dialogs.component';
 import { Entry } from 'src/app/interfaces/entry';
 import { EntryService } from 'src/app/services/entry.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-entries',
@@ -22,7 +23,8 @@ export class EntriesComponent {
   constructor(
     private router:Router,
     private entryService:EntryService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private utilService:NavService
     ) {
 
   }
@@ -116,6 +118,7 @@ openAlertExitDialog(entry:Entry) : void {
     console.log('The dialog was closed',entry.customer.name);
     if(!!result)
       this.changeStateEntry(entry)
+      this.utilService.setCantCli()
   });
 }
 }
