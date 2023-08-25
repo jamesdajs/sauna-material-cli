@@ -1,6 +1,16 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="container">
+  <div class="floatbuton noPrint">
+    <button mat-fab color="accent" [matMenuTriggerFor]="aboveMenu"  aria-label="Example icon button with a bookmark icon">
+      <mat-icon matBadgeOverlap="false" [matBadge]="sumPerson()" matBadgeSize="large">pool</mat-icon>
+    </button>
+    <mat-menu #aboveMenu="matMenu" yPosition="above">
+      <mat-list role="list">
+        <mat-list-item *ngFor="let item of cant"  role="listitem">{{item.cant}} - {{item.name}}  </mat-list-item>
+      </mat-list>
+    </mat-menu>
+  </div>
 
   <router-outlet></router-outlet>
 </div>

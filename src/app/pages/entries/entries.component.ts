@@ -32,6 +32,18 @@ export class EntriesComponent {
   
   }
   loadData(){
+    this.entryService.countPerson()
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        console.log('done')
+      },
+    })
     this.entryService.list(true)
     .subscribe({
       next: (res) => {

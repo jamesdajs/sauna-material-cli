@@ -64,4 +64,8 @@ export class EntryService {
     return this.http.get<ReportDayDetailResponse>(environment.url+"/reports/detail"+query)
     .pipe(catchError(this.authService.httpError))
   }
+  countPerson(query=""){
+    return this.http.get<any>(environment.url+"/entries//clientes/count"+query)
+    .pipe(catchError(this.authService.httpError))
+  }
 }

@@ -10,6 +10,7 @@ import { DetailProduct } from 'src/app/interfaces/detailProduct';
 import { Entry } from 'src/app/interfaces/entry';
 import { DetailProductService } from 'src/app/services/detailProduct.service';
 import { EntryService } from 'src/app/services/entry.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-details',
@@ -29,7 +30,8 @@ export class DetailsComponent {
     private entryService:EntryService,
     private dialog: MatDialog,
     private route:ActivatedRoute,
-    private detailProductService:DetailProductService
+    private detailProductService:DetailProductService,
+    private utilService:NavService
     ) {
       this.route.paramMap.subscribe(
         params =>{
@@ -69,6 +71,7 @@ export class DetailsComponent {
       if (result) {
         this.loadData()
         this.openAlertDialog('Se adiciono el servicio correctamente')
+        this.utilService.setCantCli()
       }
     });
   }

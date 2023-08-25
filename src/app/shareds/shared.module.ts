@@ -20,6 +20,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker'
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatListModule} from '@angular/material/list';
 
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ValidationComponent } from '../components/validation/validation.component';
@@ -51,7 +53,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    MatSortModule
+    MatSortModule,
+    MatBadgeModule,
+    MatListModule
 ],
  declarations: [
     NavBarComponent,
@@ -99,7 +103,9 @@ import { MatSortModule } from '@angular/material/sort';
      MatSnackBarModule,
      MatSortModule,
      DateStringPipe,
-     HourStringPipe
+     HourStringPipe,
+     MatBadgeModule,
+     MatListModule
     ]
 })
 export class SharedModule { }
