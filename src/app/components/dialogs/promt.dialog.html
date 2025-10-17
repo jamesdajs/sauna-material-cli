@@ -1,0 +1,12 @@
+
+<mat-dialog-content>
+  <p>{{data.title}}</p>
+  <mat-form-field>
+    <mat-label>{{data.message}}</mat-label>
+    <input matInput [(ngModel)]="cant" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">No </button>
+  <button mat-button (click)="sendData()" cdkFocusInitial >Ok</button>
+</mat-dialog-actions> 

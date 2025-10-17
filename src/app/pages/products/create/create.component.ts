@@ -41,7 +41,8 @@ export class CreateComponent {
         price: ['',[Validators.required,Validators.min(0.50),Validators.max(100),Validators.pattern('^[0-9]+([.][0-9]+)?$')]],
         description: [''],
         urlImage:[''],
-        categoryId:['',Validators.required]
+        categoryId:['',Validators.required],
+        belongs:[0,Validators.required],
       });
 
     }

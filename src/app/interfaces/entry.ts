@@ -10,6 +10,8 @@ export interface Entry {
     createAt:Date
     customer:Customer
     user:User
+    paid:number
+    observation:string
     details:[Detail]
     detailsProduct:[DetailProduct]
     total:number
@@ -18,5 +20,7 @@ export interface Entry {
 export interface EntryCreateRequest {
     dateOut?: string
     state?:boolean
+    paid?:number
     customerId?:string
+    observation?:string
 }

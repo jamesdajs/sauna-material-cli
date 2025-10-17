@@ -7,6 +7,7 @@ export interface Product {
     description?:string
     urlImage?:number
     state:boolean
+    belongs:number
     createAt:string
     category?:Category
     categoryId?:string
@@ -16,5 +17,6 @@ export interface Product {
     price?:string
     description?:string
     urlImage?:number
+    belongs?:number
     state?:boolean
   }

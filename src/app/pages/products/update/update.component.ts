@@ -50,6 +50,7 @@ export class UpdateComponent {
             description: params.get('description'),
             urlImage:params.get('urlImage'),
             categoryId:[parseInt(params.get('categoryId')!),[Validators.required]]
+            ,belongs:[parseInt(params.get('belongs')!),[Validators.required]]
           });
           console.log(this.loginForm.value)
         })

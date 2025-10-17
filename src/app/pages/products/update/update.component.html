@@ -22,7 +22,7 @@
                     {{validar('El precio ','price')}}
                 </mat-error>
                 </mat-form-field></td>
-               <td colspan="2" rowspan="3">
+               <td colspan="2" rowspan="4">
                 <mat-card class="example-card">
                   <img mat-card-image [src]="preview?preview:'/assets/image/product-placeholder.png'" alt="Photo of a Shiba Inu">
                 </mat-card>
@@ -49,6 +49,24 @@
                </td>
                
               </tr>
+              <tr>
+              <td>
+                <mat-form-field appearance="fill">
+                    <mat-label>Pertenece</mat-label>
+                    <mat-select formControlName="belongs" >
+                      <ng-container >
+                        <mat-option value=0>Sauna</mat-option>
+                        <mat-option value=1>Virgilio</mat-option>
+                        <mat-option value=2>Maria</mat-option>
+                        <mat-option value=3>Isabel</mat-option>
+                      </ng-container>
+                      
+                    </mat-select>
+             
+                  </mat-form-field>
+             </td>
+             
+            </tr>
               <tr><td>
                 <mat-form-field appearance="outline">
                   <mat-label>Seleccionar imagen -></mat-label>

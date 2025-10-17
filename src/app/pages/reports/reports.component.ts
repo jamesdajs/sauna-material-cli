@@ -67,5 +67,9 @@ export class ReportsComponent {
 
     this.router.navigate(['/reports/detail',{dateIn:date}])
   }
+  nextDetailUser(date: Date){
+
+    this.router.navigate(['/reports/detailuser',{dateIn:date}])
+  }
 
 }

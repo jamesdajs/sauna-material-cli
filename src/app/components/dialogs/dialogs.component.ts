@@ -5,10 +5,18 @@ import * as moment from 'moment';
 import { Product } from 'src/app/interfaces/product';
 import { Entry } from 'src/app/interfaces/entry';
 import { User } from 'src/app/interfaces/user';
+import { environment } from 'src/environments/environment';
+import { FormsModule } from '@angular/forms';
+
 moment.locale('es');
 export interface DialogData {
     title: string;
     message: string;
+  }
+  export interface DialogDataPromt {
+    title: string;
+    message: string;
+    cant:number;
   }
 //alert
 @Component({
@@ -67,7 +75,7 @@ export interface DialogData {
   })
   //customer
   export class ProductDialog {
-    
+    urlimg = environment.urlimg;
     constructor(
       public dialogRef: MatDialogRef<ProductDialog>,
       @Inject(MAT_DIALOG_DATA) public data: Product,
@@ -102,3 +110,23 @@ export interface DialogData {
     }
   }
 
+@Component({
+  selector: 'dialog-overview-example',
+  templateUrl: 'promt.dialog.html',
+})
+export class PromtDialog {
+  cant:number = 0;
+  
+  constructor(
+      public dialogRef: MatDialogRef<PromtDialog>,
+      @Inject(MAT_DIALOG_DATA) public data: DialogDataPromt,
+    ) {
+      this.cant = data.cant;
+    }  
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  sendData():void{
+    this.dialogRef.close({cant:this.cant});
+  }
+}

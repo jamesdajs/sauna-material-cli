@@ -14,6 +14,8 @@ import { DetailProductService } from "src/app/services/detailProduct.service";
 import { ErrorFormService } from "src/app/services/errorForm.service";
 import { ProductService } from "src/app/services/product.service";
 import { ServiceService } from "src/app/services/service.service";
+import { environment } from "src/environments/environment";
+
 //falta
 @Component({
     selector: 'detail-dialog',
@@ -26,6 +28,7 @@ import { ServiceService } from "src/app/services/service.service";
     productData:[Product]
     categoryData:[Category]
     productSelect:Product
+    urlimg = environment.urlimg;
     constructor(
       public dialogRef: MatDialogRef<DetailProductDialog>,
       @Inject(MAT_DIALOG_DATA) public data: Entry,

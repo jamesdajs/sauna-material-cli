@@ -50,6 +50,19 @@ export class EntriesComponent {
     .subscribe({
       next: (res) => {
         this.dataSource = new MatTableDataSource(res);
+        this.dataSource.filterPredicate = (data: Entry, filter: string) => {
+      // 1. Convertir a minúsculas y quitar espacios el término de búsqueda
+      const searchTerms = filter.trim().toLowerCase();
+      // 2. Crear una cadena que contenga todos los valores a buscar
+      //    (Aquí incluimos el nombre del usuario, el apellido y el ID).
+      const dataStr = (
+        data.customer.name + // Campo Anidado 1
+        data.id // Campo de Primer Nivel
+      ).toLowerCase();
+
+      // 3. Devolver verdadero si la cadena de datos contiene el término de búsqueda
+      return dataStr.includes(searchTerms);
+    };
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         console.log(res);

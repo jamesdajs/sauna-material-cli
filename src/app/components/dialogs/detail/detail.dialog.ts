@@ -39,7 +39,7 @@ import { ServiceService } from "src/app/services/service.service";
           });
     }
     ngOnInit() {
-      this.lockerService.list("/list/true")
+      this.lockerService.list("/list/false")
       .subscribe(data => {
         console.log(data);
         this.lockerData=data

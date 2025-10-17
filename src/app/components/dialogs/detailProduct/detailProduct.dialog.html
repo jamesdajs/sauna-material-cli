@@ -74,7 +74,7 @@
           </mat-list>
         </td >
         <td *ngIf="!!productSelect">
-          <img height="200px" mat-card-image [src]="productSelect.urlImage?('http://localhost:3000/uploads/'+productSelect.urlImage):'/assets/image/product-placeholder.png'" alt="Imagen producto">
+          <img height="200px" mat-card-image [src]="productSelect.urlImage?(urlimg+productSelect.urlImage):'/assets/image/product-placeholder.png'" alt="Imagen producto">
 
         </td>
       </tr>

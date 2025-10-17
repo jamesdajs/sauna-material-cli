@@ -16,6 +16,11 @@ const routes: Routes = [{ path: '', component: ReportsComponent },
   canActivate: [AuthGuard]
 },
 {
+  path: 'detailuser',
+  loadChildren: () => import('./day-detail-byuser/day-detail.module').then(m => m.DayDetailModule),
+  canActivate: [AuthGuard]
+},
+{
   path: 'product',
   loadChildren: () => import('./product/product.module').then(m => m.ProductModule),
   canActivate: [AuthGuard]

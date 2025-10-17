@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -25,7 +25,7 @@ import {MatListModule} from '@angular/material/list';
 
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ValidationComponent } from '../components/validation/validation.component';
-import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog, UserDialog } from '../components/dialogs/dialogs.component';
+import { AlertDialog, ConfirmDialog, CustomerDialog, ProductDialog, PromtDialog, UserDialog } from '../components/dialogs/dialogs.component';
 import { DetailDialog } from '../components/dialogs/detail/detail.dialog';
 import { DetailProductDialog } from '../components/dialogs/detailProduct/detailProduct.dialog';
 import { DateStringPipe } from '../pipes/date-string.pipe';
@@ -55,7 +55,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatSnackBarModule,
     MatSortModule,
     MatBadgeModule,
-    MatListModule
+    MatListModule,
+    FormsModule,
+    CurrencyPipe
 ],
  declarations: [
     NavBarComponent,
@@ -68,7 +70,8 @@ import { MatSortModule } from '@angular/material/sort';
     DetailDialog,
     DetailProductDialog,
     DateStringPipe,
-    HourStringPipe
+    HourStringPipe,
+    PromtDialog
 ],
  exports:      [
      MatToolbarModule,
@@ -105,7 +108,8 @@ import { MatSortModule } from '@angular/material/sort';
      DateStringPipe,
      HourStringPipe,
      MatBadgeModule,
-     MatListModule
+     MatListModule,
+     PromtDialog
     ]
 })
 export class SharedModule { }

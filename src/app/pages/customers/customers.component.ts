@@ -103,11 +103,12 @@ export class CustomersComponent {
   }
   createEntry(customer:Customer){
     console.log(customer);
-    
+    let lastResult: any = null;
     this.entryService.create({customerId:customer.id})
       .subscribe({
         next: (res) => {
         console.log(res);
+        lastResult = res;
       },
       error: (e) => {
         console.log(e);
@@ -119,7 +120,7 @@ export class CustomersComponent {
     
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
-          this.router.navigate(["/entries"])
+          this.router.navigate(["/entries/details",{id:lastResult.id}])
         });
       },
       //this.router.navigate(["/entri/create"])

@@ -24,6 +24,7 @@
       </table>
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
+       
       <div class="button-add">
         <button mat-fab extended color="primary" (click)="openCreateDetailDialog()">
           <mat-icon>add</mat-icon>
@@ -37,9 +38,7 @@
         </button>
 
       </div>
-      <div class="button-add">
-        Total pagado: {{getTotalCost() + getTotalCostProducts() }} Bs.
-      </div>
+     
       <div class="button-add">
         <button mat-fab extended color="warn" (click)="openAlertExitDialog()">
           <mat-icon>input_circle</mat-icon>
@@ -48,6 +47,47 @@
 
       </div>
     </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      <div class="button-add">
+        <button mat-fab extended color="primary" (click)="openPromtDialog()">
+          <mat-icon>add</mat-icon>
+          Agregar dinejo dejado
+        </button>
+        
+      </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1"> 
+        <div class="button-add">
+          <table>
+            <tr>
+              <td>Total consumo:</td><td>{{getTotalCost() + getTotalCostProducts() | currency:'BOB':'symbol':'1.2-2':'es-BO' }}</td>
+            </tr>
+             <tr>
+              <td>Monto dejado:</td>{{entry.paid || 0 | currency:'BOB':'symbol':'1.2-2':'es-BO'}} <td></td>
+            </tr>
+             <tr>
+              <td>Saldo a pagar: </td>{{(getTotalCost() + getTotalCostProducts()) - (entry.paid || 0) | currency:'BOB':'symbol':'1.2-2':'es-BO'}} <td></td>
+            </tr>
+          </table>
+           
+          
+        </div>
+      </mat-grid-tile>
+          <mat-grid-tile colspan="1">
+      <div class="button-add">
+        <button mat-fab extended color="primary" (click)="openPromtObsDialog()">
+          <mat-icon>add</mat-icon>
+          Agregar observacion
+        </button>
+        
+      </div>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1"> 
+        <div class="button-add">
+          Observacion : <br>
+          {{entry.observation || 'Ninguna'}}
+        </div>
+      </mat-grid-tile>
   </mat-grid-list>
   <mat-divider></mat-divider>
 <div class="titledet" >

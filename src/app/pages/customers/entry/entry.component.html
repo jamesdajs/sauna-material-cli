@@ -26,11 +26,11 @@
     <!-- Progress Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha </th>
-      <td mat-cell *matCellDef="let row"> {{row.dateIn | dateString}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.createAt | dateString}} </td>
     </ng-container>
     <ng-container matColumnDef="dateIn">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Entrada </th>
-        <td mat-cell *matCellDef="let row"> {{row.createAt | hourString}} </td>
+        <td mat-cell *matCellDef="let row"> {{row.dateIn | hourString}} </td>
       </ng-container>
     <ng-container matColumnDef="dateOut">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Salida </th>

@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailDialog } from 'src/app/components/dialogs/detail/detail.dialog';
 import { DetailProductDialog } from 'src/app/components/dialogs/detailProduct/detailProduct.dialog';
-import { AlertDialog, ConfirmDialog } from 'src/app/components/dialogs/dialogs.component';
+import { AlertDialog, ConfirmDialog, PromtDialog } from 'src/app/components/dialogs/dialogs.component';
 import { Detail } from 'src/app/interfaces/detail';
 import { DetailProduct } from 'src/app/interfaces/detailProduct';
 import { Entry } from 'src/app/interfaces/entry';
@@ -136,6 +136,7 @@ export class DetailsComponent {
           console.log(e);
         },
         complete: () => {
+          this.utilService.setCantCli()
           this.router.navigate(["/entries"]);
         }
     })
@@ -151,4 +152,54 @@ export class DetailsComponent {
         this.changeStateEntry()
     });
   }
+   openPromtDialog():void {
+      const dialogRef = this.dialog.open(PromtDialog, {
+        data:{ title:`Dinero dejado: ${this.entry.customer.name}`,
+         message:"Ingrese la cantidad de dinero que dejo el cliente",
+          cant:this.entry.paid || 0},
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result !== undefined) {
+            console.log('The dialog was closed',result);
+            this.entryService.update(this.entry.id,{paid:(result.cant as number)})
+          .subscribe({
+            next: (res) => {
+              console.log(res);
+            },
+            error: (e) => {
+              console.log(e);
+            },
+            complete: () => {
+              this.loadData()
+            }
+        })
+      }
+    });
+    }
+   openPromtObsDialog():void {
+      const dialogRef = this.dialog.open(PromtDialog, {
+        data:{ title:`Observacion: ${this.entry.customer.name}`,
+         message:"Ingrese una observacion",
+          cant:this.entry.observation},
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result !== undefined) {
+            console.log('The dialog was closed',result);
+            this.entryService.update(this.entry.id,{observation:(result.cant as number).toString()})
+          .subscribe({
+            next: (res) => {
+              console.log(res);
+            },
+            error: (e) => {
+              console.log(e);
+            },
+            complete: () => {
+              this.loadData()
+            }
+        })
+      }
+    });
+    }
 }

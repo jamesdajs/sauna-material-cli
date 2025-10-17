@@ -8,8 +8,8 @@
             <button mat-button *ngIf="role=='admin'" (click)="redirec('users')">Usuarios </button>
             <button mat-button (click)="redirec('customers')">Clientes</button>
 
-            <button mat-button [matMenuTriggerFor]="menuc">Gestiones
-                <mat-icon>expand_more</mat-icon>
+            <button mat-button [matMenuTriggerFor]="menuc" >Gestiones
+                <mat-icon >expand_more</mat-icon>
             </button>
             <mat-menu #menuc="matMenu">
                 <button mat-menu-item *ngIf="role=='admin'" (click)="redirec('categories')">Categorias de productos </button>
