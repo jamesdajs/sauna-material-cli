@@ -15,7 +15,7 @@ import { NavService } from 'src/app/services/nav.service';
   styleUrls: ['./entries.component.sass']
 })
 export class EntriesComponent {
-  displayedColumns: string[] = ['ci', 'name', 'state', 'options'];
+  displayedColumns: string[] = ['ci', 'name','lockers', 'state', 'options'];
   dataSource: MatTableDataSource<Entry>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -55,11 +55,19 @@ export class EntriesComponent {
       const searchTerms = filter.trim().toLowerCase();
       // 2. Crear una cadena que contenga todos los valores a buscar
       //    (Aquí incluimos el nombre del usuario, el apellido y el ID).
-      const dataStr = (
+      let dataStr = (
         data.customer.name + // Campo Anidado 1
-        data.id // Campo de Primer Nivel
+        data.id// Campo de Primer Nivel
       ).toLowerCase();
-
+      data.details.forEach(detail => {
+      // Itera sobre el array 'lockers' dentro de cada detalle
+      detail.lockers.forEach(locker => {
+          // Añade el valor de 'code' a la cadena de búsqueda
+          dataStr += locker.code; 
+        });
+        // Opcional: podrías añadir aquí el 'cant' si también quisieras filtrarlo
+        // dataStr += detail.cant;
+      });
       // 3. Devolver verdadero si la cadena de datos contiene el término de búsqueda
       return dataStr.includes(searchTerms);
     };

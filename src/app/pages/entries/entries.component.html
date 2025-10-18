@@ -19,7 +19,21 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
         <td mat-cell *matCellDef="let row"> {{row.customer.name}} </td>
       </ng-container>
-  
+   <ng-container matColumnDef="lockers">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Casilleros </th>
+        <td mat-cell *matCellDef="let row">
+          <ng-container *ngFor="let detail of row.details">
+
+            <button mat-raised-button *ngFor="let item of detail.lockers"
+              [color]="item.type==0?'primary':item.type==1?'accent':'warn'"
+              [matTooltip]="item.type==0?'Masculino':item.type==1?'Femenino':'Privado'" aria-label="Button">
+              {{item.code}}
+            </button>
+          </ng-container>
+        </td>
+<!-- 
+        <td mat-footer-cell *matFooterCellDef> </td> -->
+      </ng-container>
       <!-- Name Column -->
       <ng-container matColumnDef="state">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
