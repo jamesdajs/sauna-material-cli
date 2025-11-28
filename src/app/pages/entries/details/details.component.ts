@@ -111,7 +111,7 @@ export class DetailsComponent {
     console.log(state);
     
     if(state < 2)
-      state++
+      state = 2
       this.detailProductService.update(id,{state})
       .subscribe({
         next: (res) => {

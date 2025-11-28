@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { NavService } from 'src/app/services/nav.service';
@@ -13,6 +14,7 @@ export class NavBarComponent implements OnInit {
   public isMenuCollapsed = true;
   isAuth = false
   role: string = ''
+  @ViewChild('sidenav') sidenav!: MatSidenav;
   constructor(private authService: AuthService,
     private router: Router,
     private navService: NavService

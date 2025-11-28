@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from './services/user.service';
 import { NavService } from './services/nav.service';
 import { EntryService } from './services/entry.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +13,17 @@ export class AppComponent {
   title = 'Sauna Florida';
   cant:any[]=[]
   total = 0
+  isAuth = false
   constructor(private userService: UserService,private navService:NavService,
     ){
 
   }
   ngOnInit() {
-    
+
     this.userService.getMe().subscribe({
       next: (res) => {
         console.log(res);
+        this.isAuth = true
         this.navService.setUser(res)
       },
     })

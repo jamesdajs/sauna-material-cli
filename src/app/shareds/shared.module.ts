@@ -31,6 +31,7 @@ import { DetailProductDialog } from '../components/dialogs/detailProduct/detailP
 import { DateStringPipe } from '../pipes/date-string.pipe';
 import { HourStringPipe } from '../pipes/hour-string.pipe';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSidenavModule } from '@angular/material/sidenav';
 @NgModule({
  imports:      [ 
     CommonModule,
@@ -57,7 +58,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatBadgeModule,
     MatListModule,
     FormsModule,
-    CurrencyPipe
+    CurrencyPipe,
+    MatSidenavModule
 ],
  declarations: [
     NavBarComponent,
@@ -109,7 +111,8 @@ import { MatSortModule } from '@angular/material/sort';
      HourStringPipe,
      MatBadgeModule,
      MatListModule,
-     PromtDialog
+     PromtDialog,
+     MatSidenavModule
     ]
 })
 export class SharedModule { }

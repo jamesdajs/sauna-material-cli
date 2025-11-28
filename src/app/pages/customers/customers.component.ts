@@ -20,7 +20,7 @@ export class CustomersComponent {
   dataSource: MatTableDataSource<Customer>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+ searchName= ''
   constructor(
     private router:Router,
     private customerService:CustomerService,
@@ -54,6 +54,7 @@ export class CustomersComponent {
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
+    this.searchName = filterValue
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -61,7 +62,7 @@ export class CustomersComponent {
     }
   }
   create(){
-    this.router.navigate(["/customers/create"])
+    this.router.navigate(["/customers/create",{name:this.searchName}])
   }
   entries(id:number){
     this.router.navigate(["/customers/entries",{id}])

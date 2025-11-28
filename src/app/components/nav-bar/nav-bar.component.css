@@ -6,3 +6,44 @@
     cursor: pointer;
     padding-right: inherit;
   }
+  /* app.component.css */
+
+/* Clase para empujar elementos a la derecha en la toolbar */
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+/* ------------------------------------------------------------------- */
+/* ESTILOS RESPONSIVOS PARA MÓVIL                    */
+/* ------------------------------------------------------------------- */
+
+/* En pantallas pequeñas (típicamente hasta 600px) */
+@media (max-width: 699px) { 
+  
+  /* Ocultar los botones de texto de escritorio */
+  .navbar-desktop {
+    display: none !important;
+  }
+  
+  /* Mostrar el ícono de menú de hamburguesa */
+  .menu-hamburguesa {
+    display: block !important;
+  }
+}
+
+/* ------------------------------------------------------------------- */
+/* ESTILOS RESPONSIVOS PARA ESCRITORIO               */
+/* ------------------------------------------------------------------- */
+
+@media (min-width: 700px) {
+  
+  /* Mostrar los botones de texto de escritorio */
+  .navbar-desktop {
+    display: block; 
+  }
+  
+  /* Ocultar el ícono de menú de hamburguesa */
+  .menu-hamburguesa {
+    display: none !important;
+  }
+}

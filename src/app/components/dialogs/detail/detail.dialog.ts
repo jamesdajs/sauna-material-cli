@@ -42,6 +42,17 @@ import { ServiceService } from "src/app/services/service.service";
       this.lockerService.list("/list/false")
       .subscribe(data => {
         console.log(data);
+        data.sort((a, b) => {
+        const numStringA = a.code.match(/\d+/);
+        const numStringB = b.code.match(/\d+/);
+
+        // 2. Convertir los strings a números enteros (ej: 10)
+        const numA = numStringA ? parseInt(numStringA[0], 10) : 0;
+        const numB = numStringB ? parseInt(numStringB[0], 10) : 0;
+
+        // 3. Comparar numéricamente (ascendente)
+        return numA - numB;
+      });
         this.lockerData=data
       })
       this.serviceService.list("/list/true")
