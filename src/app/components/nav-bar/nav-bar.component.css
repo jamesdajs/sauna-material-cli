@@ -7,21 +7,19 @@
     padding-right: inherit;
   }
   /* app.component.css */
-
 /* Clase para empujar elementos a la derecha en la toolbar */
 .toolbar-spacer {
   flex: 1 1 auto;
 }
 
 /* ------------------------------------------------------------------- */
-/* ESTILOS RESPONSIVOS PARA MÓVIL                    */
+/* ESTILOS RESPONSIVOS PARA MÓVIL (max-width) */
 /* ------------------------------------------------------------------- */
 
-/* En pantallas pequeñas (típicamente hasta 600px) */
 @media (max-width: 699px) { 
   
-  /* Ocultar los botones de texto de escritorio */
-  .navbar-desktop {
+  /* Ocultar el contenedor de escritorio completo */
+  .navbar-container {
     display: none !important;
   }
   
@@ -32,14 +30,26 @@
 }
 
 /* ------------------------------------------------------------------- */
-/* ESTILOS RESPONSIVOS PARA ESCRITORIO               */
+/* ESTILOS RESPONSIVOS PARA ESCRITORIO (min-width) */
+/* ------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------- */
+/* ESTILOS RESPONSIVOS PARA ESCRITORIO (min-width) */
 /* ------------------------------------------------------------------- */
 
 @media (min-width: 700px) {
   
-  /* Mostrar los botones de texto de escritorio */
-  .navbar-desktop {
-    display: block; 
+  /* 1. Mantenemos el contenedor visible */
+  .navbar-container {
+    display: flex; 
+    align-items: center; /* Alinea verticalmente */
+    gap: 15px; /* Espacio entre los botones */
+  }
+  
+  /* 🛑 NUEVA REGLA CRUCIAL: Forzar a los botones a estar en línea */
+  .navbar-container > * { 
+    display: flex; /* Asegura que cada botón sea un elemento flexible */
+    flex-direction: row !important; /* Forzar el flujo horizontal */
   }
   
   /* Ocultar el ícono de menú de hamburguesa */
