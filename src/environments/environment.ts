@@ -2,10 +2,21 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// Usa el mismo host desde el que se abrió la aplicación. Así, cuando se
+// accede desde un celular por la IP local del equipo, no se intenta conectar
+// a localhost (que apuntaría al propio celular).
+const apiHost = typeof window !== 'undefined' && window.location.hostname
+  ? window.location.hostname
+  : 'localhost';
+const apiProtocol = typeof window !== 'undefined' && window.location.protocol === 'https:'
+  ? 'https'
+  : 'http';
+const apiBaseUrl = `${apiProtocol}://${apiHost}:3000`;
+
 export const environment = {
   production: false,
-  url:"http://localhost:3000/api",
-  urlimg:"http://localhost:3000/uploads/"
+  url: `${apiBaseUrl}/api`,
+  urlimg: `${apiBaseUrl}/uploads/`
 };
 
 /*

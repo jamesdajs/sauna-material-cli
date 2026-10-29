@@ -1,0 +1,120 @@
+.page-header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  margin-bottom: 20px
+
+  h1
+    margin: 0
+    font-size: 28px
+
+  .eyebrow
+    margin: 0 0 4px
+    color: #6b21a8
+    font-size: 12px
+    font-weight: 700
+    letter-spacing: .08em
+    text-transform: uppercase
+
+  .subtitle
+    margin: 6px 0 0
+    color: #6b7280
+
+.search-field
+  width: min(420px, 100%)
+
+.table-container
+  overflow-x: auto
+
+table
+  width: 100%
+  min-width: 760px
+
+.primary-cell
+  font-weight: 600
+
+.secondary-cell
+  color: #6b7280
+  font-size: 12px
+
+.locker-list
+  display: flex
+  flex-wrap: wrap
+  gap: 4px
+
+.empty-cell
+  padding: 32px
+  color: #6b7280
+  text-align: center
+
+.pending-cards
+  display: none
+
+.pending-card
+  display: grid
+  gap: 14px
+  margin-bottom: 12px
+
+.pending-card-header
+  display: flex
+  align-items: flex-start
+  justify-content: space-between
+  gap: 12px
+
+  h2
+    margin: 0
+    font-size: 18px
+
+.pending-card .eyebrow
+  margin: 0 0 4px
+  color: #6b21a8
+  font-size: 11px
+  font-weight: 700
+  text-transform: uppercase
+
+.quantity-badge
+  padding: 5px 9px
+  border-radius: 999px
+  background: #ede9fe
+  color: #5b21b6
+  font-weight: 600
+
+.pending-card-details
+  display: grid
+  gap: 10px
+  margin: 0
+
+  div
+    display: flex
+    justify-content: space-between
+    gap: 12px
+
+  dt
+    color: #6b7280
+
+  dd
+    margin: 0
+    text-align: right
+
+.pending-card button
+  width: 100%
+
+@media (max-width: 600px)
+  .desktop-table
+    display: none
+
+  .pending-cards
+    display: block
+
+  .page-header
+    align-items: flex-start
+
+    h1
+      font-size: 22px
+
+    .subtitle
+      font-size: 13px
+
+@media (max-width: 600px)
+  .page-header h1
+    font-size: 22px

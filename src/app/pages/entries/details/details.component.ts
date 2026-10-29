@@ -9,6 +9,7 @@ import { Detail } from 'src/app/interfaces/detail';
 import { DetailProduct } from 'src/app/interfaces/detailProduct';
 import { Entry } from 'src/app/interfaces/entry';
 import { DetailProductService } from 'src/app/services/detailProduct.service';
+import { DetailService } from 'src/app/services/detail.service';
 import { EntryService } from 'src/app/services/entry.service';
 import { NavService } from 'src/app/services/nav.service';
 
@@ -21,8 +22,8 @@ export class DetailsComponent {
   id:string
   entry:Entry
   loading:boolean = true
-  displayedColumns: string[] = [ 'name', 'lockers','price','cant','total', 'options'];
-  displayedProductColumns: string[] = [ 'name', 'price','cant','state', 'total', 'options'];
+  displayedColumns: string[] = [ 'name', 'lockers','price','cant','total','paid'];
+  displayedProductColumns: string[] = [ 'name', 'price','cant','state', 'total'];
   dataSource: MatTableDataSource<Detail>;
   dataProductSource: MatTableDataSource<DetailProduct>;
   constructor(
@@ -30,14 +31,25 @@ export class DetailsComponent {
     private entryService:EntryService,
     private dialog: MatDialog,
     private route:ActivatedRoute,
+    private detailService:DetailService,
     private detailProductService:DetailProductService,
     private utilService:NavService
     ) {
+      this.utilService.getUser().subscribe(user => this.role = user?.role.name || '')
       this.route.paramMap.subscribe(
         params =>{
           this.id = params.get('id')!;
         })
 
+  }
+  role = ''
+
+  canManageSales(){
+    return this.role === 'admin' || this.role === 'user'
+  }
+
+  canRegisterDetails(){
+    return this.canManageSales() || this.role === 'delivery'
   }
   ngAfterViewInit() {
     this.loadData()
@@ -49,7 +61,18 @@ export class DetailsComponent {
         console.log(res);
         this.entry = res
         this.dataSource= new MatTableDataSource(res.details)
-        this.dataProductSource = new MatTableDataSource(res.detailsProduct)
+        const productsByHour = [...res.detailsProduct].sort((first, second) => {
+          const firstTime = new Date(first.createAt).getTime();
+          const secondTime = new Date(second.createAt).getTime();
+
+          if (firstTime !== secondTime) {
+            return firstTime - secondTime;
+          }
+
+          return Number(first.id) - Number(second.id);
+        });
+
+        this.dataProductSource = new MatTableDataSource(productsByHour)
       },
       error: (e) => {
         console.log(e);
@@ -107,12 +130,25 @@ export class DetailsComponent {
       return 0
     }).reduce((acc, value) => acc + value, 0);
   }
+  changePaidService(detail: Detail, paid: boolean){
+    const previousValue = detail.paid;
+    detail.paid = paid;
+
+    this.detailService.update(detail.id, {paid})
+      .subscribe({
+        error: () => {
+          detail.paid = previousValue;
+        },
+        complete: () => this.loadData()
+      });
+  }
   changeStateProduct(id:string,state:number){
-    console.log(state);
-    
-    if(state < 2)
-      state = 2
-      this.detailProductService.update(id,{state})
+    if (state >= 2) {
+      return;
+    }
+
+    const nextState = state + 1;
+    this.detailProductService.update(id,{state: nextState})
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -124,6 +160,9 @@ export class DetailsComponent {
           this.loadData()
         }
     })
+  }
+  printDetail(){
+    window.print()
   }
   changeStateEntry(){
 

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertDialog } from 'src/app/components/dialogs/dialogs.component';
 import { CustomerService } from 'src/app/services/customer.service';
+import { EntryService } from 'src/app/services/entry.service';
 import { ErrorFormService } from 'src/app/services/errorForm.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class CreateComponent implements OnInit {
     private router:Router,
     private route: ActivatedRoute,
     private errorform:ErrorFormService,
-    private dialog: MatDialog
+    private entryService: EntryService
     
     ) {
       this.route.paramMap.subscribe(
@@ -42,27 +41,22 @@ export class CreateComponent implements OnInit {
   create(){
     this.customerService.create(this.loginForm.value)
     .subscribe({
-      
+      next: (customer) => {
+        this.entryService.create({customerId: customer.id})
+        .subscribe({
+          next: (entry) => {
+            this.router.navigate(["/entries/details", {id: entry.id}]);
+          },
+          error: (e) => console.log(e)
+        });
+      },
       error: (e) => {
         console.log(e);
-      },
-      complete: () => {
-        this.openAlertDialog()
       },
     });
   }
   validar(text:string,name:string){
     return this.errorform.validar(text,name,this.loginForm)
-  }
-  openAlertDialog(): void {
-    const dialogRef = this.dialog.open(AlertDialog, {
-      data: {title: "Sauna Florida", message: "Se creo el cliente correctamente"},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.router.navigate(["/customers"])
-    });
   }
   back(){
     this.router.navigate(["/customers"])

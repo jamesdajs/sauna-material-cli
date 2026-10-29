@@ -22,6 +22,10 @@ export class DetailService {
     return this.http.post<Detail>(environment.url+"/details",body)
     .pipe(catchError(this.authService.httpError))
   }
+  createArray(body:DetailCreateRequest[]){
+    return this.http.post<Detail[]>(environment.url+"/details",body)
+    .pipe(catchError(this.authService.httpError))
+  }
   update(id:string,body:DetailCreateRequest){
     return this.http.put<Detail>(environment.url+"/details/"+
     id,body)

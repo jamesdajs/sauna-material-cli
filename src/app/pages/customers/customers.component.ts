@@ -9,6 +9,7 @@ import { Customer, CustomerCreateRequest } from 'src/app/interfaces/customer';
 import { Entry } from 'src/app/interfaces/entry';
 import { CustomerService } from 'src/app/services/customer.service';
 import { EntryService } from 'src/app/services/entry.service';
+import { NavService } from 'src/app/services/nav.service';
 
 @Component({
   selector: 'app-customers',
@@ -25,9 +26,16 @@ export class CustomersComponent {
     private router:Router,
     private customerService:CustomerService,
     private entryService:EntryService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private navService: NavService
     ) {
+    this.navService.getUser().subscribe(user => this.role = user?.role.name || '')
+  }
 
+  role = ''
+
+  canManageSales(){
+    return this.role === 'admin' || this.role === 'user'
   }
 
   ngAfterViewInit() {

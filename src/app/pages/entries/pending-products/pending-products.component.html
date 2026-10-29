@@ -1,0 +1,106 @@
+<div class="page-header">
+  <div>
+    <p class="eyebrow">Productos</p>
+    <h1>Pedidos pendientes</h1>
+    <p class="subtitle">Productos que todavía no fueron entregados.</p>
+  </div>
+  <mat-icon color="accent">local_shipping</mat-icon>
+</div>
+
+<mat-form-field appearance="outline" class="search-field">
+  <mat-label>Buscar pedido</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Producto, cliente o casillero">
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<div class="mat-elevation-z8 table-container desktop-table">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="product">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Producto</th>
+      <td mat-cell *matCellDef="let row">
+        <div class="primary-cell">{{ row.product.name }}</div>
+        <div class="secondary-cell">{{ row.price }} Bs.</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="customer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+      <td mat-cell *matCellDef="let row">{{ row.customer.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lockers">
+      <th mat-header-cell *matHeaderCellDef>Casillero</th>
+      <td mat-cell *matCellDef="let row">
+        <span *ngIf="row.lockers.length; else noLocker" class="locker-list">
+          <mat-chip *ngFor="let locker of row.lockers">{{ locker.code }}</mat-chip>
+        </span>
+        <ng-template #noLocker><span class="secondary-cell">Sin casillero</span></ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cant">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+      <td mat-cell *matCellDef="let row">{{ row.cant }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="createAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora del pedido</th>
+      <td mat-cell *matCellDef="let row">{{ row.createAt | hourString }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Acción</th>
+      <td mat-cell *matCellDef="let row">
+        <button *ngIf="row.state === 0" mat-raised-button color="primary" (click)="deliver(row)">
+          <mat-icon>check</mat-icon>
+          Entregar
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell empty-cell" [attr.colspan]="displayedColumns.length">
+        No hay pedidos pendientes.
+      </td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>
+
+<div class="pending-cards">
+  <mat-card *ngFor="let row of dataSource.filteredData" class="pending-card">
+    <div class="pending-card-header">
+      <div>
+        <span class="eyebrow">Pedido</span>
+        <h2>{{row.product.name}}</h2>
+      </div>
+      <span class="quantity-badge">x{{row.cant}}</span>
+    </div>
+    <mat-divider></mat-divider>
+    <dl class="pending-card-details">
+      <div>
+        <dt>Cliente</dt>
+        <dd>{{row.customer.name}}</dd>
+      </div>
+      <div>
+        <dt>Hora</dt>
+        <dd>{{row.createAt | hourString}}</dd>
+      </div>
+      <div>
+        <dt>Casillero</dt>
+        <dd>
+          <span *ngIf="row.lockers.length; else mobileNoLocker">
+            <mat-chip *ngFor="let locker of row.lockers">{{locker.code}}</mat-chip>
+          </span>
+          <ng-template #mobileNoLocker>Sin casillero</ng-template>
+        </dd>
+      </div>
+    </dl>
+    <button *ngIf="row.state === 0" mat-raised-button color="primary" (click)="deliver(row)">
+      <mat-icon>check</mat-icon>
+      Entregar pedido
+    </button>
+  </mat-card>
+</div>

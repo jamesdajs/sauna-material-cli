@@ -1,6 +1,149 @@
+:host
+  display: block
+  padding: 16px
+
+.details-page
+  display: grid
+  gap: 20px
+
+.entry-header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 16px
+
+  h1
+    margin: 0
+    font-size: 28px
+
+.eyebrow,
+.card-label
+  margin: 0 0 5px
+  color: #6b21a8
+  font-size: 12px
+  font-weight: 700
+  letter-spacing: .08em
+  text-transform: uppercase
+
+.entry-id
+  margin: 5px 0 0
+  color: #6b7280
+
+.info-grid,
+.summary-grid
+  display: grid
+  grid-template-columns: repeat(2, minmax(0, 1fr))
+  gap: 12px
+
+.info-card,
+.summary-card,
+.observation-card
+  padding: 16px
+  border: 1px solid #e5e7eb
+  border-radius: 10px
+  background: #fff
+
+.info-card
+  display: grid
+  gap: 5px
+
+.summary-grid
+  grid-template-columns: repeat(3, minmax(0, 1fr))
+
+.summary-card
+  display: grid
+  gap: 8px
+
+  span
+    color: #6b7280
+    font-size: 13px
+
+  strong
+    font-size: 20px
+
+.paid-value
+  display: flex
+  align-items: center
+  gap: 4px
+
+.summary-card.highlight
+  border-color: #c4b5fd
+  background: #f5f3ff
+
+.action-toolbar
+  display: flex
+  flex-wrap: wrap
+  gap: 10px
+
+.observation-card
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 16px
+
+  p
+    margin: 0
+    color: #4b5563
+
 .titledet
-    padding: 13px
-    text-align: center
-    font-size: x-large
-.button-add
-    padding: 0 25px
+  padding: 10px 0
+  text-align: left
+  font-size: 20px
+  font-weight: 600
+
+.responsive-table
+  width: 100%
+  overflow-x: auto
+
+  table
+    width: 100%
+    min-width: 760px
+
+.responsive-table mat-checkbox
+  white-space: nowrap
+
+@media (max-width: 700px)
+  :host
+    padding: 12px
+
+  .entry-header h1
+    font-size: 22px
+
+  .info-grid,
+  .summary-grid
+    grid-template-columns: 1fr
+
+  .action-toolbar
+    display: grid
+    grid-template-columns: 1fr 1fr
+
+    button
+      width: 100%
+
+  .observation-card
+    align-items: flex-start
+    flex-direction: column
+
+    button
+      width: 100%
+
+  .titledet
+    font-size: 18px
+
+@media print
+  :host
+    padding: 0
+
+  .action-toolbar,
+  .observation-card > button,
+  .paid-value button
+    display: none !important
+
+  .details-page
+    gap: 10px
+
+  .responsive-table
+    overflow: visible
+
+    table
+      min-width: 0

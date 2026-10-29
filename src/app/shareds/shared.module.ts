@@ -22,6 +22,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { NavBarComponent } from '../components/nav-bar/nav-bar.component';
 import { ValidationComponent } from '../components/validation/validation.component';
@@ -32,6 +33,8 @@ import { DateStringPipe } from '../pipes/date-string.pipe';
 import { HourStringPipe } from '../pipes/hour-string.pipe';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSidenavModule } from '@angular/material/sidenav';
+
+import {MatChipsModule} from '@angular/material/chips';
 @NgModule({
  imports:      [ 
     CommonModule,
@@ -57,9 +60,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSortModule,
     MatBadgeModule,
     MatListModule,
+    MatCheckboxModule,
     FormsModule,
     CurrencyPipe,
-    MatSidenavModule
+    MatSidenavModule,
+    MatChipsModule
 ],
  declarations: [
     NavBarComponent,
@@ -111,8 +116,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
      HourStringPipe,
      MatBadgeModule,
      MatListModule,
+     MatCheckboxModule,
      PromtDialog,
-     MatSidenavModule
+     MatSidenavModule,
+     MatChipsModule
     ]
 })
 export class SharedModule { }

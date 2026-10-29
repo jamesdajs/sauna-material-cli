@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard, loginGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 //ng generate module customers --route customers --module app.module
 const routes: Routes = [
@@ -12,41 +13,53 @@ const routes: Routes = [
   {
     path: 'customers',
     loadChildren: () => import('./pages/customers/customers.module').then(m => m.CustomersModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['admin', 'user', 'delivery'] }
   },
   {
     path: 'categories',
     loadChildren: () => import('./pages/catagories/catagories.module').then(m => m.CatagoriesModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['admin'] }
   },
   {
     path: 'products',
     loadChildren: () => import('./pages/products/products.module').then(m => m.ProductsModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['admin'] }
   },
 
   {
     path: 'lockers',
     loadChildren: () => import('./pages/lockers/lockers.module').then(m => m.LockersModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['admin', 'user'] }
   },
   {
     path: 'services',
     loadChildren: () => import('./pages/service/service.module').then(m => m.ServiceModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['admin'] }
   },
   {
     path: 'entries',
     loadChildren: () => import('./pages/entries/entries.module').then(m => m.EntriesModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['admin', 'user', 'delivery'] }
   },
   {
     path: 'users',
     loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['admin'] }
   },
 
-  { path: 'reports', loadChildren: () => import('./pages/reports/reports.module').then(m => m.ReportsModule) },
+  {
+    path: 'reports',
+    loadChildren: () => import('./pages/reports/reports.module').then(m => m.ReportsModule),
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['admin', 'user'] }
+  },
   {
     path: '',
     redirectTo: '',

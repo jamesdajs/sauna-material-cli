@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, finalize, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { DetailProduct, DetailProductCreateRequest } from '../interfaces/detailProduct';
+import { DetailProduct, DetailProductCreateRequest, PendingDetailProduct } from '../interfaces/detailProduct';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -12,6 +12,10 @@ export class DetailProductService {
   constructor(private http :HttpClient,private authService:AuthService) { }
   list(state:boolean){
     return this.http.get<[DetailProduct]>(environment.url+"/detailproduct/"+state)
+    .pipe(catchError(this.authService.httpError))
+  }
+  pending(){
+    return this.http.get<PendingDetailProduct[]>(environment.url+"/detailproduct/pending")
     .pipe(catchError(this.authService.httpError))
   }
   getDetail(id:string){

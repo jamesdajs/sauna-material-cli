@@ -1,18 +1,97 @@
-table 
-  width: 400px
+.dialog-content
+  width: min(760px, 90vw)
+  max-height: 70vh
+  padding: 0 8px 8px
 
+.selection-section
+  padding: 16px 0
+  border-bottom: 1px solid #e5e7eb
 
-.mat-mdc-form-field 
-  font-size: 14px
+.section-heading
+  display: flex
+  align-items: center
+  justify-content: space-between
+  gap: 16px
+  margin-bottom: 12px
+
+  h2
+    margin: 0
+    font-size: 16px
+    font-weight: 600
+
+  span
+    color: #6b7280
+    font-size: 12px
+
+mat-selection-list
+  padding: 0
+  max-height: 220px
+  overflow-y: auto
+  border: 1px solid #e5e7eb
+  border-radius: 8px
+
+.service-option,
+.locker-option
+  display: flex
+  align-items: center
+  justify-content: space-between
   width: 100%
 
+.service-option > span,
+.locker-option
+  display: grid
+  gap: 4px
 
-td, th 
-  width: 25%
-.btn-create
-  margin-right:15px
-  margin-bottom: 15px
-mat-form-field 
+.service-option small,
+.locker-option small,
+.selected-item-info span,
+.selected-item-info small
+  color: #6b7280
+  font-size: 12px
+
+.service-option > strong
+  color: #5b21b6
+  font-size: 13px
+
+.section-help
+  margin: -4px 0 12px
+  color: #6b7280
+  font-size: 12px
+
+.selected-items
+  display: grid
+  gap: 10px
+
+.selected-item
+  display: grid
+  grid-template-columns: minmax(0, 1fr) 120px
+  align-items: center
+  gap: 12px
+  padding: 12px
+  border: 1px solid #e5e7eb
+  border-radius: 8px
+
+.selected-item-info
+  display: grid
+  gap: 4px
+
+.quantity-field
   width: 100%
-button
-  margin-right:15px
+
+mat-form-field
+  font-size: 13px
+
+.empty-state
+  margin: 16px 0 0
+  color: #6b7280
+  text-align: center
+
+.locker-section
+  border-bottom: 0
+
+@media (max-width: 600px)
+  .dialog-content
+    width: auto
+
+  .selected-item
+    grid-template-columns: 1fr

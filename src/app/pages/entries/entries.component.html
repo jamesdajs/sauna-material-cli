@@ -49,7 +49,21 @@
   
       <!-- Fruit Column -->
       <ng-container matColumnDef="options">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opciones </th>
+        <th  mat-header-cell *matHeaderCellDef mat-sort-header> Opciones </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="details(row)" aria-label="Example icon-button with a menu">
+            <mat-icon>info</mat-icon>
+          </button>
+         
+
+            
+            <!-- <button (click)="openAlertExitDialog(row)"  mat-menu-item>
+              
+              <mat-icon color="warn"  >{{row.state?'delete':'check_circle'}}</mat-icon>
+              <span>{{row.state?'Cerrar entrada':'Cerrado'}}</span>
+            </button> 
+          </mat-menu>
+        <!-- -
         <td mat-cell *matCellDef="let row"> 
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
             <mat-icon>more_vert</mat-icon>
@@ -65,9 +79,10 @@
               
               <mat-icon color="warn"  >{{row.state?'delete':'check_circle'}}</mat-icon>
               <span>{{row.state?'Cerrar entrada':'Cerrado'}}</span>
-            </button> -->
+            </button> 
           </mat-menu>
         </td>
+         -->
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

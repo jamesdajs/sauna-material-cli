@@ -2,7 +2,7 @@
   
   <mat-sidenav #sidenav mode="over">
     <mat-nav-list>
-      <a mat-list-item (click)="sidenav.close(); redirec('customers')">Clientes</a>
+      <a mat-list-item *ngIf="role=='admin' || role=='user' || role=='delivery'" (click)="sidenav.close(); redirec('customers')">Clientes</a>
       <a mat-list-item *ngIf="role=='admin'" (click)="sidenav.close(); redirec('users')">Usuarios</a>
       <a mat-list-item  [matMenuTriggerFor]="menuc" >Gestiones
                     <mat-icon >expand_more</mat-icon>
@@ -10,12 +10,13 @@
                 <mat-menu  #menuc="matMenu">
                     <button mat-menu-item *ngIf="role=='admin'" (click)="sidenav.close();redirec('categories')">Categorias de productos </button>
                     <button mat-menu-item *ngIf="role=='admin'" (click)="sidenav.close();redirec('products')">Productos </button>
-                    <button mat-menu-item *ngIf="role=='admin' || role=='receptionist'" (click)="sidenav.close();redirec('lockers')">Casilleros
+                    <button mat-menu-item *ngIf="role=='admin' || role=='user'" (click)="sidenav.close();redirec('lockers')">Casilleros
                     </button>
                     <button mat-menu-item *ngIf="role=='admin'" (click)="sidenav.close();redirec('services')">Servicios </button>
 
                 </mat-menu>  
       <a mat-list-item  (click)="sidenav.close(); redirec('entries')">Entradas</a>
+      <a mat-list-item  (click)="sidenav.close(); redirec('entries/pending-products')">Pedidos pendientes</a>
    <a mat-list-item [matMenuTriggerFor]="menu">Reportes
                     <mat-icon>expand_more</mat-icon>
    </a>
@@ -47,7 +48,7 @@
                 <span class="navbar-container">
 
                     <button class="navbar-desktop" mat-button *ngIf="role=='admin'" (click)="redirec('users')">Usuarios </button>
-                    <button class="navbar-desktop" mat-button (click)="redirec('customers')">Clientes</button>
+                    <button class="navbar-desktop" mat-button *ngIf="role=='admin' || role=='user' || role=='delivery'" (click)="redirec('customers')">Clientes</button>
     
                     <button class="navbar-desktop"  mat-button [matMenuTriggerFor]="menuc" >Gestiones
                         <mat-icon >expand_more</mat-icon>
@@ -55,13 +56,14 @@
                     <mat-menu class="navbar-desktop"  #menuc="matMenu">
                         <button mat-menu-item *ngIf="role=='admin'" (click)="redirec('categories')">Categorias de productos </button>
                         <button mat-menu-item *ngIf="role=='admin'" (click)="redirec('products')">Productos </button>
-                        <button mat-menu-item *ngIf="role=='admin' || role=='receptionist'" (click)="redirec('lockers')">Casilleros
+                        <button mat-menu-item *ngIf="role=='admin' || role=='user'" (click)="redirec('lockers')">Casilleros
                         </button>
                         <button mat-menu-item *ngIf="role=='admin'" (click)="redirec('services')">Servicios </button>
     
                     </mat-menu>
                     
                     <button class="navbar-desktop" mat-button (click)="redirec('entries')">Entradas </button>
+                    <button class="navbar-desktop" mat-button (click)="redirec('entries/pending-products')">Pedidos pendientes</button>
                     <button class="navbar-desktop" mat-button [matMenuTriggerFor]="menu">Reportes
                         <mat-icon>expand_more</mat-icon>
                     </button>

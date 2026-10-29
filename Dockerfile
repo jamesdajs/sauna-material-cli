@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Copia e instala dependencias para aprovechar el caché
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm ci
 
 # Copia el resto del código fuente
 COPY . .
@@ -17,7 +17,7 @@ COPY . .
 # Compila la aplicación en modo producción. 
 # Esto genera los archivos estáticos en el directorio 'dist/' o 'dist/nombre-de-tu-app'.
 # Asumimos que 'npm run build' ejecuta 'ng build'.
-RUN npm run build -- --output-path=./dist --configuration=production
+RUN npm run build -- --configuration=production
 
 
 # ====================================================================
@@ -34,7 +34,7 @@ COPY config/nginx.conf /etc/nginx/conf.d/default.conf
 # 2. Copia los archivos estáticos compilados de la etapa 'build' al directorio de Nginx.
 # 🚨 AJUSTA ESTA LÍNEA si tu salida de 'ng build' no es directamente 'dist'.
 # Por ejemplo: si es 'dist/nombre-de-tu-app', cambia '/app/dist' por '/app/dist/nombre-de-tu-app'
-COPY --from=build app/dist /usr/share/nginx/html
+COPY --from=build /app/dist/material/ /usr/share/nginx/html/
 
 # Puerto por defecto de Nginx
 EXPOSE 80

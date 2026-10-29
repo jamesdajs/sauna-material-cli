@@ -1,92 +1,149 @@
-<h1 mat-dialog-title> Agregar un Producto</h1>
-<mat-dialog-content>
+<h1 mat-dialog-title>Agregar productos</h1>
+<!-- 
+  <mat-dialog-content>
+  
+    <form [formGroup]="loginForm">
+      <table>
+        <tr>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>Categoria</mat-label>
+              <mat-select formControlName="categoryId" (selectionChange)="onChange($event)">
+                <ng-container *ngFor="let item of categoryData; let i = index">
+  
+                  <mat-option [value]="item.id">{{item.name}}</mat-option>
+                </ng-container>
+              </mat-select>
+              <mat-error>
+                {{validar('La categoria ','categoryId')}}
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>Product</mat-label>
+              <mat-select formControlName="productId" (selectionChange)="onChangeProduct($event)">
+                <ng-container *ngFor="let item of productData; let i = index">
+  
+                  <mat-option *ngIf="item.state" [value]="item.id">{{item.name+' '+(item.price) }} Bs</mat-option>
+  
+  
+                </ng-container>
+              </mat-select>
+              <mat-error>
+                {{validar('El producto ','productId')}}
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field class="example-full-width">
+              <mat-label>Cantidad</mat-label>
+              <input formControlName="cant" type="number" matInput placeholder="Cantidad">
+              <mat-error>
+                {{validar('La cantidad ','cant')}}
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr *ngIf="!!productSelect">
+          <td>{{productSelect.name}}</td>
+          <td colspan="2">{{productSelect.description}} </td>
+        </tr>
+        <tr>
+          <td *ngIf="!!productSelect">
+            <h4>Detalle</h4>
+            <mat-list>
+              <mat-list-item>
+                <span matListItemTitle>Producto</span>
+                <span matListItemLine> {{productSelect.name}}</span>
+              </mat-list-item>
+              <mat-list-item>
+                <span matListItemTitle>Precio</span>
+                <span>Bs. {{productSelect.price}}</span>
+              </mat-list-item>
+              <mat-list-item>
+                <span matListItemTitle>Cantidad</span>
+                {{loginForm.value.cant}}
+              </mat-list-item>
+              <mat-list-item>
+                <span matListItemTitle>Total</span>
+                {{loginForm.value.cant*productSelect.price}}
+              </mat-list-item>
+            </mat-list>
+          </td >
+          <td *ngIf="!!productSelect">
+            <img height="200px" mat-card-image [src]="productSelect.urlImage?(urlimg+productSelect.urlImage):'/assets/image/product-placeholder.png'" alt="Imagen producto">
+  
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+          </td>
+        </tr>
+      </table>
+  
+    </form>
+  </mat-dialog-content>
+-->
+<mat-dialog-content class="dialog-content">
+  <section class="selection-section">
+    <div class="section-heading">
+      <h2>1. Elige una categoría</h2>
+      <span>{{ categoryData.length }} disponibles</span>
+    </div>
+    <mat-chip-listbox aria-label="Categorías de productos" class="category-list">
+      <mat-chip-option *ngFor="let item of categoryData" (click)="selectCategory(item.id)">
+        {{ item.name }}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </section>
 
-  <form [formGroup]="loginForm">
-    <table>
-      <tr>
-        <td>
-          <mat-form-field appearance="fill">
-            <mat-label>Categoria</mat-label>
-            <mat-select formControlName="categoryId" (selectionChange)="onChange($event)">
-              <ng-container *ngFor="let item of categoryData; let i = index">
+  <section class="selection-section">
+    <div class="section-heading">
+      <h2>2. Selecciona los productos</h2>
+      <span>{{ arrayProductSelect.length }} seleccionados</span>
+    </div>
+    <mat-selection-list aria-label="Productos disponibles" [multiple]="true" (selectionChange)="selectProduct($event)">
+      <mat-list-option *ngFor="let product of productData" [value]="product" [selected]="isProductSelected(product.id)" [disabled]="!product.state">
+        <span class="product-option">
+          <span>{{ product.name }}</span>
+          <strong>Bs. {{ product.price }}</strong>
+        </span>
+      </mat-list-option>
+    </mat-selection-list>
+    <p class="empty-state" *ngIf="!productData.length">Selecciona una categoría para ver sus productos.</p>
+  </section>
 
-                <mat-option [value]="item.id">{{item.name}}</mat-option>
-              </ng-container>
-            </mat-select>
-            <mat-error>
-              {{validar('La categoria ','categoryId')}}
-            </mat-error>
-            <!--
-
-                       -->
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field appearance="fill">
-            <mat-label>Product</mat-label>
-            <mat-select formControlName="productId" (selectionChange)="onChangeProduct($event)">
-              <ng-container *ngFor="let item of productData; let i = index">
-
-                <mat-option *ngIf="item.state" [value]="item.id">{{item.name+' '+(item.price) }} Bs</mat-option>
-
-
-              </ng-container>
-            </mat-select>
-            <mat-error>
-              {{validar('El producto ','productId')}}
-            </mat-error>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="example-full-width">
-            <mat-label>Cantidad</mat-label>
-            <input formControlName="cant" type="number" matInput placeholder="Cantidad">
-            <mat-error>
-              {{validar('La cantidad ','cant')}}
-            </mat-error>
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr *ngIf="!!productSelect">
-        <td>{{productSelect.name}}</td>
-        <td colspan="2">{{productSelect.description}} </td>
-      </tr>
-      <tr>
-        <td *ngIf="!!productSelect">
-          <h4>Detalle</h4>
-          <mat-list>
-            <mat-list-item>
-              <span matListItemTitle>Producto</span>
-              <span matListItemLine> {{productSelect.name}}</span>
-            </mat-list-item>
-            <mat-list-item>
-              <span matListItemTitle>Precio</span>
-              <span>Bs. {{productSelect.price}}</span>
-            </mat-list-item>
-            <mat-list-item>
-              <span matListItemTitle>Cantidad</span>
-              {{loginForm.value.cant}}
-            </mat-list-item>
-            <mat-list-item>
-              <span matListItemTitle>Total</span>
-              {{loginForm.value.cant*productSelect.price}}
-            </mat-list-item>
-          </mat-list>
-        </td >
-        <td *ngIf="!!productSelect">
-          <img height="200px" mat-card-image [src]="productSelect.urlImage?(urlimg+productSelect.urlImage):'/assets/image/product-placeholder.png'" alt="Imagen producto">
-
-        </td>
-      </tr>
-      <tr>
-        <td colspan="3">
-        </td>
-      </tr>
-    </table>
-
-  </form>
+  <section class="selection-section selected-section" *ngIf="arrayProductSelect.length">
+    <div class="section-heading">
+      <h2>3. Configura el pedido</h2>
+      <span>Se enviará al pedido actual</span>
+    </div>
+    <div class="selected-products">
+      <div class="selected-product" *ngFor="let item of arrayProductSelect">
+        <div class="selected-product-info">
+          <strong>{{ item.name }}</strong>
+          <span>Bs. {{ item.price }} por unidad</span>
+        </div>
+        <mat-form-field appearance="outline" class="quantity-field">
+          <mat-label>Cantidad</mat-label>
+          <input type="number" matInput [(ngModel)]="item.cant" min="1" max="20">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="state-field">
+          <mat-label>Estado</mat-label>
+          <mat-select [(ngModel)]="item.state">
+            <mat-option [value]="0">Pedido</mat-option>
+            <mat-option [value]="1">Entregado</mat-option>
+            <mat-option [value]="2">Entregado y pagado</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </section>
 </mat-dialog-content>
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">No </button>
-  <button mat-button (click)="create()" [disabled]="!loginForm.valid" cdkFocusInitial>Si</button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="create()" [disabled]="!arrayProductSelect.length" cdkFocusInitial>
+    Agregar productos
+  </button>
 </div>
