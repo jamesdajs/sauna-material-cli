@@ -45,11 +45,15 @@ export class DetailsComponent {
   role = ''
 
   canManageSales(){
-    return this.role === 'admin' || this.role === 'user'
+    return this.role === 'admin' || this.role === 'user' || this.role === 'receptionist'
   }
 
   canRegisterDetails(){
     return this.canManageSales() || this.role === 'delivery'
+  }
+
+  canCloseEntry(){
+    return this.canManageSales()
   }
   ngAfterViewInit() {
     this.loadData()

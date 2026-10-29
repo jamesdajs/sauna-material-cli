@@ -1,59 +1,88 @@
 .example-spacer {
-    flex: 1 1 auto;
-  }
-  .items{
-    font-size: medium;
-    cursor: pointer;
-    padding-right: inherit;
-  }
-  /* app.component.css */
-/* Clase para empujar elementos a la derecha en la toolbar */
-.toolbar-spacer {
   flex: 1 1 auto;
 }
 
-/* ------------------------------------------------------------------- */
-/* ESTILOS RESPONSIVOS PARA MÓVIL (max-width) */
-/* ------------------------------------------------------------------- */
+.items {
+  font-size: medium;
+  cursor: pointer;
+  padding-right: inherit;
+}
+
+.menu-hamburguesa {
+  display: none;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navbar-container button {
+  white-space: nowrap;
+}
+
+mat-sidenav {
+  width: min(86vw, 320px);
+  border-radius: 0 18px 18px 0;
+}
+
+mat-sidenav mat-nav-list {
+  padding: 12px 8px;
+}
+
+mat-sidenav mat-list-item,
+mat-sidenav a[mat-list-item] {
+  min-height: 48px;
+  margin: 3px 0;
+  border-radius: 10px;
+}
+
+mat-sidenav a[mat-list-item]:hover {
+  background: rgba(103, 58, 183, .08);
+}
+
+mat-sidenav > button {
+  margin: 8px 16px 18px;
+}
+
+mat-toolbar {
+  min-height: 64px;
+  padding: 0 16px;
+}
 
 @media (max-width: 699px) { 
-  
-  /* Ocultar el contenedor de escritorio completo */
+  mat-toolbar {
+    min-height: 56px;
+    padding: 0 10px;
+  }
+
+  mat-toolbar > span:not(.example-spacer) {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .menu-hamburguesa {
+    display: inline-flex !important;
+    margin-right: 4px;
+  }
+
   .navbar-container {
     display: none !important;
   }
-  
-  /* Mostrar el ícono de menú de hamburguesa */
-  .menu-hamburguesa {
-    display: block !important;
+
+  .noPrint {
+    display: block;
   }
 }
 
-/* ------------------------------------------------------------------- */
-/* ESTILOS RESPONSIVOS PARA ESCRITORIO (min-width) */
-/* ------------------------------------------------------------------- */
-
-/* ------------------------------------------------------------------- */
-/* ESTILOS RESPONSIVOS PARA ESCRITORIO (min-width) */
-/* ------------------------------------------------------------------- */
-
 @media (min-width: 700px) {
-  
-  /* 1. Mantenemos el contenedor visible */
   .navbar-container {
-    display: flex; 
-    align-items: center; /* Alinea verticalmente */
-    gap: 15px; /* Espacio entre los botones */
+    display: flex;
   }
-  
-  /* 🛑 NUEVA REGLA CRUCIAL: Forzar a los botones a estar en línea */
-  .navbar-container > * { 
-    display: flex; /* Asegura que cada botón sea un elemento flexible */
-    flex-direction: row !important; /* Forzar el flujo horizontal */
-  }
-  
-  /* Ocultar el ícono de menú de hamburguesa */
-  .menu-hamburguesa {
-    display: none !important;
+
+  .navbar-container > * {
+    display: inline-flex;
+    flex-direction: row !important;
   }
 }

@@ -7,12 +7,12 @@ import { EntriesComponent } from './entries.component';
 const routes: Routes = [{ path: 'pending-products',
  loadChildren: () => import('./pending-products/pending-products.module').then(m => m.PendingProductsModule),
  canActivate:[AuthGuard, RoleGuard],
- data: { roles: ['admin', 'user', 'delivery'] }
+ data: { roles: ['admin', 'user', 'receptionist', 'delivery'] }
 },
 { path: 'details', 
  loadChildren: () => import('./details/details.module').then(m => m.DetailsModule),
  canActivate:[AuthGuard, RoleGuard],
- data: { roles: ['admin', 'user', 'delivery'] }
+ data: { roles: ['admin', 'user', 'receptionist', 'delivery'] }
 },
 { path: '', component: EntriesComponent },
 ];

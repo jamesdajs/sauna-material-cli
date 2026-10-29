@@ -1,6 +1,6 @@
 <p class="textTitle" >Clientes</p>
 
-<button *ngIf="canManageSales()" class="btn-create" mat-raised-button color="primary" (click)="create()">Crear Cliente</button>
+<button *ngIf="canCreateSales()" class="btn-create" mat-raised-button color="primary" (click)="create()">Crear Cliente</button>
 <mat-form-field>
   <mat-label>Buscar</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ej. CI o nombre" #input>
@@ -46,11 +46,11 @@
             <mat-icon color="accent">info</mat-icon>
             <span>Ver</span>
           </button>
-          <button *ngIf="canManageSales()" (click)="createEntry(row)" mat-menu-item>
+          <button *ngIf="canCreateSales()" (click)="createEntry(row)" mat-menu-item>
             <mat-icon color="accent">edit_note</mat-icon>
             <span>Crear entrada</span>
           </button>
-          <button *ngIf="canManageSales()" (click)="update(row)" mat-menu-item>
+          <button *ngIf="canManageCustomers()" (click)="update(row)" mat-menu-item>
             <mat-icon color="accent">edit</mat-icon>
             <span>Modificar</span>
           </button>
@@ -58,7 +58,7 @@
             <mat-icon color="accent">info</mat-icon>
             <span>Ver entradas</span>
           </button>
-          <button *ngIf="canManageSales()" (click)="openDialog(row)" mat-menu-item>
+          <button *ngIf="canManageCustomers()" (click)="openDialog(row)" mat-menu-item>
 
             <mat-icon [color]="row.state?'warn':'primary'">{{row.state?'delete':'check_circle'}}</mat-icon>
             <span>{{row.state?'Deshabilitar':'Habilitar'}}</span>

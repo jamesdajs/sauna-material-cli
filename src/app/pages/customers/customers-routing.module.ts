@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'create',
     loadChildren: () => import('./create/create.module').then(m => m.CreateModule),
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['admin', 'user'] }
+    data: { roles: ['admin', 'user', 'receptionist'] }
   },
   {
     path: 'update',
@@ -25,7 +25,7 @@ const routes: Routes = [
     path: 'entries',
     loadChildren: () => import('./entry/entry.module').then(m => m.EntryModule),
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['admin', 'user', 'delivery'] }
+    data: { roles: ['admin', 'user', 'receptionist', 'delivery'] }
   },
 
 

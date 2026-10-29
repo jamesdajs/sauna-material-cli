@@ -17,8 +17,9 @@ export class AuthService {
     return this.http.post(environment.url+"/auth/singin",body)
   }
   logout(){
-    this.cookieService.deleteAll()
-    this.router.navigate(["/"])
+    this.cookieService.delete('token', '/');
+    this.cookieService.deleteAll();
+    return this.router.navigateByUrl('/', { replaceUrl: true });
   }
   httpError = (error:any)=>{
       if (error.status == 401){

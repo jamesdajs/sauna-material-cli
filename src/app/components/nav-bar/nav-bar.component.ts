@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,8 +17,21 @@ export class NavBarComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   constructor(private authService: AuthService,
     private router: Router,
-    private navService: NavService
+    private navService: NavService,
+    private elementRef: ElementRef<HTMLElement>
   ) { }
+
+  @HostListener('document:click', ['$event'])
+  closeMenuWhenClickingOutside(event: MouseEvent) {
+    if (!this.sidenav?.opened) {
+      return;
+    }
+
+    const target = event.target as Node;
+    if (!this.elementRef.nativeElement.contains(target)) {
+      this.sidenav.close();
+    }
+  }
 
   ngOnInit(): void {
     this.navService.getUser().subscribe({
@@ -42,9 +55,10 @@ export class NavBarComponent implements OnInit {
     })
   }
   logout() {
-    this.authService.logout()
+    this.navService.clearUser();
     this.isMenuCollapsed = true;
-    this.navService.clearUser()
+    this.sidenav?.close();
+    this.authService.logout();
   }
   redirec(link: string) {
     this.router.navigate([link])

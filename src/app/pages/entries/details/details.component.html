@@ -30,7 +30,7 @@
         <mat-icon>add</mat-icon>
         Agregar producto
       </button>
-      <button *ngIf="canManageSales()" mat-raised-button color="warn" (click)="openAlertExitDialog()">
+      <button *ngIf="canCloseEntry()" mat-raised-button color="warn" (click)="openAlertExitDialog()">
         <mat-icon>input</mat-icon>
         Cerrar entrada
       </button>

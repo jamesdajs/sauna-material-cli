@@ -34,7 +34,11 @@ export class CustomersComponent {
 
   role = ''
 
-  canManageSales(){
+  canCreateSales(){
+    return this.role === 'admin' || this.role === 'user' || this.role === 'receptionist'
+  }
+
+  canManageCustomers(){
     return this.role === 'admin' || this.role === 'user'
   }
 

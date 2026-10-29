@@ -31,7 +31,7 @@ export class CreateComponent implements OnInit {
         name: [this.searchName, [Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
         ci: [''],
         phone: ['',[Validators.minLength(7),Validators.maxLength(10),Validators.pattern(/^([0-9])*$/)]],
-        gender: ['',[Validators.required]],
+        gender: ['0',[Validators.required]],
         observation:['']
       });
      }

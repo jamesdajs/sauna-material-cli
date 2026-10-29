@@ -14,7 +14,7 @@ const routes: Routes = [
     path: 'customers',
     loadChildren: () => import('./pages/customers/customers.module').then(m => m.CustomersModule),
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['admin', 'user', 'delivery'] }
+    data: { roles: ['admin', 'user', 'receptionist', 'delivery'] }
   },
   {
     path: 'categories',
@@ -33,7 +33,7 @@ const routes: Routes = [
     path: 'lockers',
     loadChildren: () => import('./pages/lockers/lockers.module').then(m => m.LockersModule),
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['admin', 'user'] }
+    data: { roles: ['admin', 'user', 'receptionist'] }
   },
   {
     path: 'services',
@@ -45,7 +45,7 @@ const routes: Routes = [
     path: 'entries',
     loadChildren: () => import('./pages/entries/entries.module').then(m => m.EntriesModule),
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['admin', 'user', 'delivery'] }
+    data: { roles: ['admin', 'user', 'receptionist', 'delivery'] }
   },
   {
     path: 'users',
