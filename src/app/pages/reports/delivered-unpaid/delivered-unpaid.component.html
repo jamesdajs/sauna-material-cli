@@ -1,0 +1,90 @@
+<div class="report-header">
+  <div>
+    <p class="eyebrow">Control de caja</p>
+    <h1>Productos entregados sin cobrar</h1>
+    <p class="subtitle">Pedidos entregados en la fecha seleccionada que todavía figuran sin pagar.</p>
+  </div>
+  <mat-icon color="warn">warning</mat-icon>
+</div>
+
+<div class="report-filters noPrint">
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha de entrega</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (dateChange)="search()">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="search()" [disabled]="loading">
+    <mat-icon>search</mat-icon>
+    Buscar
+  </button>
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Producto, cliente o entrada">
+  </mat-form-field>
+</div>
+
+<p *ngIf="errorMessage" class="error-message" role="alert">{{errorMessage}}</p>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+<section class="report-total">
+  <span>Total entregado pendiente de cobro</span>
+  <strong>{{getTotalPending() | currency:'BOB':'symbol':'1.2-2':'es-BO'}}</strong>
+</section>
+
+<div class="mat-elevation-z8 responsive-table">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="deliveredAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Hora de entrega</th>
+      <td mat-cell *matCellDef="let row">{{row.deliveredAt | hourString}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="entryId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Entrada</th>
+      <td mat-cell *matCellDef="let row">#{{row.entryId}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="product">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Producto</th>
+      <td mat-cell *matCellDef="let row">{{row.product}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="customer">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+      <td mat-cell *matCellDef="let row">{{row.customer}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Responsable</th>
+      <td mat-cell *matCellDef="let row">{{row.user || 'No registrado'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cant">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+      <td mat-cell *matCellDef="let row">{{row.cant}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio unitario</th>
+      <td mat-cell *matCellDef="let row">{{row.price | currency:'BOB':'symbol':'1.2-2':'es-BO'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pendiente</th>
+      <td mat-cell *matCellDef="let row">{{row.total | currency:'BOB':'symbol':'1.2-2':'es-BO'}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell empty-cell" [attr.colspan]="displayedColumns.length">
+        No hay productos entregados sin cobrar en esta fecha.
+      </td>
+    </tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>
+
+<div class="print-action noPrint">
+  <button mat-fab extended color="primary" onclick="window.print()">Imprimir</button>
+</div>

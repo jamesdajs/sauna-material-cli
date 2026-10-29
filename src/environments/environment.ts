@@ -16,6 +16,7 @@ const apiBaseUrl = `${apiProtocol}://${apiHost}:3000`;
 export const environment = {
   production: false,
   url: `${apiBaseUrl}/api`,
+  socketUrl: apiBaseUrl,
   urlimg: `${apiBaseUrl}/uploads/`
 };
 

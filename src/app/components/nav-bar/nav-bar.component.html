@@ -22,6 +22,7 @@
    </a>
                 <mat-menu  #menu="matMenu">
                     <button mat-menu-item (click)="sidenav.close();redirec('reports')">Reprotes Diarios</button>
+                    <button mat-menu-item (click)="sidenav.close();redirec('reports/delivered-unpaid')">Entregados sin cobrar</button>
                     <button mat-menu-item (click)="sidenav.close();redirec('reports/product')">Reportes de Productos</button>
                     <button mat-menu-item (click)="sidenav.close();redirec('reports/service')">Reportes de Servicios</button>
                     <button mat-menu-item (click)="sidenav.close();redirec('reports/customer')">Reportes de Clientes </button>
@@ -69,6 +70,7 @@
                     </button>
                     <mat-menu class="navbar-desktop" #menu="matMenu">
                         <button mat-menu-item (click)="redirec('reports')">Reprotes Diarios</button>
+                        <button mat-menu-item (click)="redirec('reports/delivered-unpaid')">Entregados sin cobrar</button>
                         <button mat-menu-item (click)="redirec('reports/product')">Reportes de Productos</button>
                         <button mat-menu-item (click)="redirec('reports/service')">Reportes de Servicios</button>
                         <button mat-menu-item (click)="redirec('reports/customer')">Reportes de Clientes </button>

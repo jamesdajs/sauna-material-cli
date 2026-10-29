@@ -86,6 +86,7 @@ export class DetailDialog implements OnInit {
           serviceId: service.id,
           cant: 1,
           price: service.price,
+          paid: false,
           entryId: this.data.id,
           lockerId: [],
         });

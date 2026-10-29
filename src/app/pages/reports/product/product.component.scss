@@ -1,0 +1,114 @@
+.report-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+}
+
+.report-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.report-header > mat-icon {
+  width: 3rem;
+  height: 3rem;
+  font-size: 3rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  margin: 0.4rem 0 0;
+  color: #64748b;
+}
+
+.report-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.search-field {
+  flex: 1 1 16rem;
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: fit-content;
+  min-width: 13rem;
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid #3f51b5;
+  border-radius: 0.5rem;
+  background: #f5f7ff;
+}
+
+.summary-card span,
+.summary-card small {
+  color: #64748b;
+}
+
+.summary-card strong {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.report-table {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+}
+
+.report-table table {
+  width: 100%;
+  min-width: 34rem;
+}
+
+.empty-cell {
+  padding: 1.5rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.error-message {
+  padding: 0.75rem 1rem;
+  border-radius: 0.35rem;
+  background: #fff1f0;
+  color: #b42318;
+}
+
+.print-action {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1.25rem 0;
+}
+
+@media print {
+  .noPrint,
+  .report-header > mat-icon,
+  .mat-column-options,
+  mat-paginator {
+    display: none !important;
+  }
+
+  .report-table {
+    overflow: visible;
+    box-shadow: none !important;
+  }
+
+  .report-table table {
+    min-width: 0;
+  }
+}

@@ -5,6 +5,11 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [{ path: '', component: ReportsComponent },
 {
+  path: 'delivered-unpaid',
+  loadChildren: () => import('./delivered-unpaid/delivered-unpaid.module').then(m => m.DeliveredUnpaidModule),
+  canActivate: [AuthGuard]
+},
+{
   path: 'day',
 
   loadChildren: () => import('./day/day.module').then(m => m.DayModule),

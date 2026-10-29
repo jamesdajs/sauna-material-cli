@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { ReportDayDetailResponse } from '../interfaces/report';
 import { Product } from '../interfaces/product';
 import { Service } from '../interfaces/service';
+import { DeliveredUnpaidProductReport } from '../interfaces/report';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,11 @@ export class EntryService {
   reportDayDetail(query=""){
     return this.http.get<ReportDayDetailResponse>(environment.url+"/reports/detail"+query)
     .pipe(catchError(this.authService.httpError))
+  }
+  reportDeliveredUnpaidProducts(day:string){
+    return this.http.get<DeliveredUnpaidProductReport[]>(
+      `${environment.url}/reports/delivered-unpaid/${day}`
+    ).pipe(catchError(this.authService.httpError))
   }
   countPerson(query=""){
     return this.http.get<any>(environment.url+"/entries/clientes/count"+query)

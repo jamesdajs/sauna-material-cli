@@ -9,7 +9,6 @@ import { Detail } from 'src/app/interfaces/detail';
 import { DetailProduct } from 'src/app/interfaces/detailProduct';
 import { Entry } from 'src/app/interfaces/entry';
 import { DetailProductService } from 'src/app/services/detailProduct.service';
-import { DetailService } from 'src/app/services/detail.service';
 import { EntryService } from 'src/app/services/entry.service';
 import { NavService } from 'src/app/services/nav.service';
 
@@ -31,7 +30,6 @@ export class DetailsComponent {
     private entryService:EntryService,
     private dialog: MatDialog,
     private route:ActivatedRoute,
-    private detailService:DetailService,
     private detailProductService:DetailProductService,
     private utilService:NavService
     ) {
@@ -129,22 +127,13 @@ export class DetailsComponent {
   }
   getTotalCostProducts(){
     return this.dataProductSource.data.map(t => {
-      if(t.state == 2)
-        return t.price*t.cant
-      return 0
+      return t.state === 2 ? t.price * t.cant : 0;
     }).reduce((acc, value) => acc + value, 0);
   }
-  changePaidService(detail: Detail, paid: boolean){
-    const previousValue = detail.paid;
-    detail.paid = paid;
-
-    this.detailService.update(detail.id, {paid})
-      .subscribe({
-        error: () => {
-          detail.paid = previousValue;
-        },
-        complete: () => this.loadData()
-      });
+  getTotalDeliveredProducts(){
+    return this.dataProductSource.data.map(t => {
+      return t.state === 1 ? t.price * t.cant : 0;
+    }).reduce((acc, value) => acc + value, 0);
   }
   changeStateProduct(id:string,state:number){
     if (state >= 2) {

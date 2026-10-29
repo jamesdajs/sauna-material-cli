@@ -43,6 +43,7 @@
             {{ selectedLockerIds.length }} casillero(s) asignado(s)
           </small>
         </div>
+        <mat-checkbox [(ngModel)]="item.paid">Pagado al crear</mat-checkbox>
         <mat-form-field appearance="outline" class="quantity-field">
           <mat-label>Cantidad</mat-label>
           <input type="number" matInput [(ngModel)]="item.cant" min="1" max="20">

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ViewChild } from '@angular/core';
 import { Entry } from 'src/app/interfaces/entry';
 import { EntryService } from 'src/app/services/entry.service';
 
@@ -14,50 +16,66 @@ export class ReportsComponent {
   dateIni:String = ''
   dateEnd:String = ''
   displayedColumns: string[] = [ 'date', 'total', 'options'];
-  dataSource: MatTableDataSource<Entry>;
+  dataSource = new MatTableDataSource<Entry>([]);
+  loading = false;
+  errorMessage = '';
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(
     private router:Router,
-    private entryService:EntryService,
-    private dialog: MatDialog
+    private entryService:EntryService
     ) {
-
+      this.dataSource.filterPredicate = (row: Entry, filter: string) => {
+        const reportRow = row as Entry & { yt?: string; total?: number };
+        return `${reportRow.yt || ''} ${reportRow.total || ''}`.toLowerCase().includes(filter);
+      };
   }
   ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.loadData()
-  
   }
   loadData(){
+    this.loading = true;
+    this.errorMessage = '';
     this.entryService.report().subscribe({
       next: (res) => {
-        console.log(res);
-        this.dataSource= new MatTableDataSource(res)
+        this.dataSource.data = res;
+        this.dataSource.paginator?.firstPage();
       },
       error: (e) => {
-        console.log(e);
+        this.errorMessage = 'No se pudieron cargar los reportes diarios.';
+        this.loading = false;
+        console.error(e);
       },
-      complete: () => {
-        console.log('done')
-      },
+      complete: () => this.loading = false
     })
   }
   getTotalCost() {
-    if (!this.dataSource) {
-      return 0;
-    }
-    return this.dataSource.data.map(t => parseInt(t.total+"")).reduce((acc, value) => acc + value, 0);
+    return this.dataSource.filteredData.reduce((total, row) => {
+      const reportRow = row as Entry & { total?: number };
+      return total + Number(reportRow.total || 0);
+    }, 0);
+  }
+  applyFilter(event: Event) {
+    this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.paginator?.firstPage();
   }
   search(){
+    this.loading = true;
+    this.errorMessage = '';
     this.entryService.report(`?dateIni=${this.dateIni}&dateEnd=${this.dateEnd}`).subscribe({
       next: (res) => {
-        console.log(res);
-        this.dataSource= new MatTableDataSource(res)
+        this.dataSource.data = res;
+        this.dataSource.paginator?.firstPage();
       },
       error: (e) => {
-        console.log(e);
+        this.errorMessage = 'No se pudieron filtrar los reportes diarios.';
+        this.loading = false;
+        console.error(e);
       },
-      complete: () => {
-        console.log('done')
-      },
+      complete: () => this.loading = false
     })
   }
   next(date: Date){

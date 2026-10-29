@@ -3,9 +3,12 @@
     <p class="eyebrow">Productos</p>
     <h1>Pedidos pendientes</h1>
     <p class="subtitle">Productos que todavía no fueron entregados.</p>
+    <p class="sync-status">La lista se actualiza en tiempo real cuando cambian los pedidos.</p>
   </div>
   <mat-icon color="accent">local_shipping</mat-icon>
 </div>
+
+<p *ngIf="syncError" class="sync-error" role="alert">{{syncError}}</p>
 
 <mat-form-field appearance="outline" class="search-field">
   <mat-label>Buscar pedido</mat-label>
@@ -51,9 +54,9 @@
     <ng-container matColumnDef="options">
       <th mat-header-cell *matHeaderCellDef>Acción</th>
       <td mat-cell *matCellDef="let row">
-        <button *ngIf="row.state === 0" mat-raised-button color="primary" (click)="deliver(row)">
+        <button *ngIf="row.state === 0" mat-raised-button color="primary" (click)="deliver(row)" [disabled]="isDelivering(row)">
           <mat-icon>check</mat-icon>
-          Entregar
+          {{isDelivering(row) ? 'Guardando...' : 'Entregar'}}
         </button>
       </td>
     </ng-container>
@@ -98,9 +101,9 @@
         </dd>
       </div>
     </dl>
-    <button *ngIf="row.state === 0" mat-raised-button color="primary" (click)="deliver(row)">
+    <button *ngIf="row.state === 0" mat-raised-button color="primary" (click)="deliver(row)" [disabled]="isDelivering(row)">
       <mat-icon>check</mat-icon>
-      Entregar pedido
+      {{isDelivering(row) ? 'Guardando...' : 'Entregar pedido'}}
     </button>
   </mat-card>
 </div>
